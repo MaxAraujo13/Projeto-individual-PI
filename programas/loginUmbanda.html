@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vozes de Luanda - Login</title> <!-- Título específico desta página -->
+    <link rel="stylesheet" href="../styles/globalUmbanda.css"> 
+    <link rel="stylesheet" href="../styles/loginUmbanda.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <span class="logo-icone">🌿</span>
+                <b>Vozes de Luanda</b>
+            </div>
+            <div class="nav-links">
+                <a href="homeUmbanda.html">Home</a>
+                <a href="loginUmbanda.html" class="ativo">Login</a> <!-- class="ativo" marca esta como página atual -->
+                <a href="cadastroUmbanda.html" class="button-entrar">Cadastro</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="area"> <!-- Seção que centraliza o card na tela -->
+        <div class="card"> <!-- Card branco do formulário -->
+            <h2>Entrar</h2>
+
+            <label for="login-email">E-mail</label>
+            <input type="email" id="login-email" placeholder="seu@email.com">
+
+            <label for="login-senha">Senha</label>
+            <input type="password" id="login-senha" placeholder="••••••••"> <!-- type="password" esconde os caracteres digitados -->
+
+            <button class="botao" onclick="fLogin()">Entrar</button>
+
+            <p class="auth-rodape">
+                Não tem conta? <a href="cadastroUmbanda.html">Cadastre-se</a>
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+
+            <div class="footer-col">
+                <h4>Umbanda Luz</h4>
+                <p>Um espaço de fé, respeito e aprendizado sobre a religião da Umbanda. Unidos pela luz e pela caridade.</p>
+                <p class="axe">Axé a todos!</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <p>📧 contato@umbandaluz.com.br</p>
+                <p>📍 São Paulo, SP — Brasil</p>
+                <p>📞 (11) 99999-0000</p>
+                <p>🕐 Seg–Sex, 9h às 18h</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Links rápidos</h4>
+                <a href="homeUmbanda.html">Home</a>
+                <a href="#">Sobre a Umbanda</a>
+                <a href="#">Entidades</a>
+                <a href="#">Calendário sagrado</a>
+                <a href="loginUmbanda.html">Login</a>
+                <a href="cadastroUmbanda.html">Cadastro</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Envie uma sugestão</h4>
+                <div class="sugestao-form">
+                    <input type="text" id="sug-nome" placeholder="Seu nome">
+                    <input type="email" id="sug-email" placeholder="Seu e-mail">
+                    <textarea id="sug-msg" placeholder="Escreva sua sugestão..."></textarea>
+                    <button class="botao-sug" onclick="enviarSugestao()">Enviar sugestão</button>
+                    <p id="sug-confirmacao" class="sug-confirmacao">✓ Sugestão enviada! Obrigado.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="footer-linha">
+        <p class="footer-rodape">© 2026 Vozes de Luanda — Feito com amor por um aluno Spetech</p>
+    </footer>
+
+    <script>
+
+        function fLogin() {
+
+            let login = true; 
+
+            if (!login) {
+
+                alert ('verifique seus dados e tente novamente');
+            } else {
+
+                 location.href="tela-entidades.html"
+
+            }
+ 
+        }
+
+
+        /* Mesma função de sugestão usada em todas as páginas — ver homeUmbanda.html para comentários detalhados */
+        function enviarSugestao() {
+           
+        }
+    </script>
+
+</body>
+</html>
