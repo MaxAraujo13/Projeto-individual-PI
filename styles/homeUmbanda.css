@@ -2,7 +2,7 @@
 
 /* Imagem de fundo com overlay escuro */
 .body {
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('fundo.jpg');
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/fundo.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -42,7 +42,7 @@
     width: 380px;
     height: 300px;
     border-radius: 10px;
-    background-image: url('umbanda.jpg');
+    background-image: url('img/umbanda.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -88,7 +88,7 @@
     width: 380px;
     height: 300px;
     border-radius: 10px;
-    background-image: url('umbanda.jpg');
+    background-image: url('img/umbanda.jpg');
     background-size: cover;
     background-position: center;
     flex-shrink: 0;
