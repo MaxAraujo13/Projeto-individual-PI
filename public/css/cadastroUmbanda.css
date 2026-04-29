@@ -1,0 +1,128 @@
+/* CADASTRO */
+
+/* Centraliza o card na tela */
+.area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 2rem;
+    min-height: 100px;
+}
+
+/* Card branco do formulário */
+.card {
+    background-color: #ffffff;
+    border: 1px solid #d0d0c8;
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.card h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2d6a2d;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.card label {
+    font-size: 0.85rem;
+    color: #555555;
+    margin-top: 6px;
+}
+
+.card input,
+.card select {
+    padding: 8px 12px;
+    border: 1px solid #bbbbbb;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background-color: #fafaf8;
+    font-family: "Open Sans", sans-serif;
+}
+
+/* Texto de erro de validação */
+.validacao {
+
+    color: red;
+}
+
+.box-cadastro{
+
+    display: none;
+    background-color:antiquewhite;
+    border: 2px solid #157415;
+    border-radius: 10px;
+    padding: 1,1;
+    width: 400px;
+    height: 200px;
+    position: relative;
+    right: 40px;
+    box-shadow: 0px 0px 10px #303030;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+
+.texto-cadastro{
+
+    display: flex;
+    background-color:white;
+    border: 5px solid #157415;
+    border-radius: 10px;
+    width: 350px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    
+}
+
+
+.card input:focus,
+.card select:focus {
+    outline: none;
+    border-color: #2d6a2d;
+}
+
+/* Botão principal de cadastro */
+.botao {
+    width: 100%;
+    padding: 10px;
+    background-color: #2d6a2d;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.botao:hover {
+    background-color: #245424;
+}
+
+/* Link para a página de login */
+.rodape {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #666666;
+    margin-top: 6px;
+}
+
+.rodape a {
+    color: #2d6a2d;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.rodape a:hover {
+    text-decoration: underline;
+}
