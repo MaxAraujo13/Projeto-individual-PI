@@ -18,6 +18,8 @@
     align-items: center;
     justify-content: center;
     height: 600px;
+    background-size: cover;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/umbanda.jpg') ;
 }
 
 .banner-texto {
@@ -32,31 +34,38 @@
     font-weight: 600;
     color: #2d6a2d;
     margin-bottom: 1rem;
-    margin-left: 70px;
+    margin-left: 40px;
 }
+
+.banner-texto h2{
+
+    color: white;
+
+}
+
+
 
 .banner-texto p {
     font-size: 1.3rem;
     line-height: 1.7;
-    color: #444444;
+    color: white;
     margin-bottom: 1rem;
-    margin-left: 80px;
-}
+    }
 
-.butao {
+.botao-home {
 
     display: flex;
     color: white;
-    width: 450px;
-    height: 85px;
+    width: 350px;
+    height: 65px;
     font-size: 25px;
-    border-radius: 20px;
+    border-radius: 10px;
     border: solid 5px #2d6a2d;
-    position: center;
+    position: relative;
     margin-top: 20px;
-    background-color: #2d6a2d;
-    justify-content: center;
-    align-items: center;
+    background-color: #2d6a2dd2;
+
+
 
 }
 
@@ -115,4 +124,10 @@
     background-size: cover;
     background-position: center;
     flex-shrink: 0;
+}
+
+.testecor {
+
+    background-color: rgb(184, 2, 2)
+
 }

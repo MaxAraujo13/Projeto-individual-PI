@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- pra adaptar ao tamanho da tela -->
     <title>Vozes de Luanda - Home</title> 
     <link rel="stylesheet" href="../css/globalUmbanda.css"> <!-- CSS global  -->
-    <link rel="stylesheet" href="../css/homeUmbanda.css"> 
+    <link rel="stylesheet" href="../css/tela-entidade.css"> 
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap" rel="stylesheet"> 
@@ -14,7 +14,7 @@
 
 <body class="body">
 
-    <header> 
+    <header id="head"> 
         <nav class="navbar"> 
             <div class="logo"> 
                 <span class="logo-icone">🌿</span> 
@@ -28,41 +28,36 @@
         </nav>
     </header>
 
-    <section class="banner"> 
+    <section class="banner" id="inicio"> 
         <div class="banner-texto"> 
-            <h1>Entidades: Ancestralidade viva</h1> 
-            <p>
-               Texto resumido sobre as entidades
-            </p>
-            <p>Entenda mais sobre os mistérios do mundo espiritual abaixo:</p>
+            <p><b>Bem vindo, fulano!</b></p>
+            <h1>Entidades: Ancestralidade viva</h1>            
+              <h2>Qual entidade você deseja conhecer?</h2>
+        
+            <select class="botao-home" id="select_entidade" onchange="fEntidade()"> 
+                <option value="" selected disabled>Entidades da Umbanda</option>
+                <option value="0">Preto Velho</option>
+                <option value="1">Caboclo</option>
+                <option value="2">Boiadeiro</option>
+                <option value="3">Erê</option>
+                <option value="4">Marinheiro</option>
+                <option value="5">Baiano</option>
+                <option value="6">Povo cigano</option>
+                <option value="7">Exu</option>
+                <option value="8">Pombagira</option>
+                <option value="9">Malandros</option>
+            </select>
+
         </div>
     </section>
 
-
-    <section class="texto-bloco"> <!-- Select para mudar as informações sobre as entidades -->
-        <h2>Sobre qual entidade você deseja entender?</h2>
-        <p>
-            <select id="select_entidade" onchange="fEntidade()"> 
-                <option value="" selected disabled>Entidades da Umbanda</option>
-                <option value="caboclo">Caboclo</option>
-                <option value="pretoVelho">Preto Velho</option>
-                <option value="exu">Exu</option>
-                <option value="pombagira">Pombagira</option>
-                <option value="ere">Erê</option>
-                <option value="marujo">Marinheiro</option>
-                <option value="boiadeiro">Boiadeiro</option>
-                <option value="nao">Ainda não sei</option>
-            </select>
-
-        </p>
-    </section>
 
     <section class="texto-bloco">
 
         <div class="separa">
             <div class="hero-texto texto-bloco-coonteudo">
-                <h1>História da umbanda: A luta e a resistência pela ancestralidade.</h1>
-                <p>
+                <h1 id="id_h1">História da umbanda: A luta e a resistência pela ancestralidade.</h1>
+                <p id="id_p">
 
                     Texto resumido sobre a historia da umbanda
 
@@ -75,11 +70,11 @@
     </section>
 
     
-    <footer>
+    <footer id="id_pe">
         <div class="footer-grid"> 
 
             <div class="footer-col"> 
-                <h4>Umbanda Luz</h4>
+                <h4>Vozes de Luanda</h4>
                 <p>Um espaço de fé, respeito e aprendizado sobre a religião da Umbanda. Unidos pela luz e pela caridade.</p>
                 <p class="axe">Axé a todos!</p> 
             </div>
@@ -95,8 +90,7 @@
             <div class="footer-col"> 
                 <h4>Links rápidos</h4>
                 <a href="index.html">Dashboard</a>
-                <a href="#">Entidades</a>
-                <a href="#">Calendário sagrado</a>
+                <a href="#inicio">Entidades</a>
                 <a href="loginUmbanda.html">Sair</a>
                 <a href="agradecimentos.html">Especial</a>
             </div>
@@ -105,7 +99,6 @@
                 <h4>Envie uma sugestão</h4>
                 <div class="sugestao-form">
                     <input type="text" id="sug-nome" placeholder="Seu nome">
-                    <input type="email" id="sug-email" placeholder="Seu e-mail"> 
                     <textarea id="sug-msg" placeholder="Escreva sua sugestão..."></textarea>
                     <button class="botao-sug" onclick="enviarSugestao()">Enviar sugestão</button> 
                     <p id="sug-confirmacao" class="sug-confirmacao">✓ Sugestão enviada! Obrigado.</p> <!-- Só mostra depois de enviar-->
@@ -125,6 +118,63 @@
             
             let entidade = select_entidade.value;
 
+            if (entidade == 0) {
+
+                head.style.backgroundColor = 'white';
+
+                id_pe.style.backgroundColor = 'black'
+
+
+            } else if (entidade == 1) {
+
+                id_h1.innerHTML = "caboclo";
+                id_p.innerHTML = "Caboclo";
+
+            } else if (entidade == 2) {
+            
+                head.style.backgroundColor = '#3a1d06';
+                
+            } else if (entidade == 3) {
+
+                head.style.backgroundColor = '#f609af';
+
+                id_pe.style.backgroundColor = '#37e7e7'
+      
+            
+            } else if (entidade == 4) {
+                
+                head.style.backgroundColor = '#067ac3';
+
+            } else if (entidade == 5) {
+              
+                head.style.backgroundColor = '#ec8909';
+
+            } else if (entidade == 6) {
+                    
+                head.style.backgroundColor = '#e6d517';
+
+            } else if (entidade == 7) {
+
+                head.style.backgroundColor = 'black';
+                
+                id_pe.style.backgroundColor = '#9A0000'
+
+            } else if (entidade == 8) {
+                  
+                head.style.backgroundColor = '#9A0000';
+                
+                id_pe.style.backgroundColor = 'black';
+
+
+            } else if (entidade == 9) {
+
+                head.style.backgroundColor = 'White'
+                
+                id_pe.style.backgroundColor = '#9A0000';
+
+
+
+            }
             
 
 
