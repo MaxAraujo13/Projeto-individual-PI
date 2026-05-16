@@ -1,5 +1,11 @@
 /* HOME — HERO */
 
+html {
+
+     scroll-behavior: smooth;
+
+}
+
 /* Imagem de fundo com overlay escuro */
 .body {
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/fundo.jpg');
@@ -12,12 +18,14 @@
     display: flex;
     gap: 2rem;
     align-items: center;
-    background-color: #fffffff3;
+    background-color: #ffffffd6;
     padding: 3rem 2rem;
     border-bottom: 1px solid #dddddd;
     align-items: center;
     justify-content: center;
-    height: 600px;
+    height: 650px;
+    box-shadow: 0px 0px 10px #000000;
+
 }
 
 .banner-texto {
@@ -62,6 +70,7 @@
 
 /* Área da imagem principal do banner */
 .banner-imagem {
+    
     width: 380px;
     height: 300px;
     border-radius: 10px;
@@ -75,16 +84,21 @@
 /* Card branco com borda para seções de conteúdo */
 .texto-bloco {
     margin: 2rem;
-    background-color: #fffffff2;
+    background-color: #ffffffd3;
     border: 1px solid #d4d4cc;
     border-radius: 10px;
     padding: 2rem;
+    box-shadow: 0px 0px 10px #161616;
 }
 
 .texto-bloco h2 {
+
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1rem;
+    position: relative;
+    top: 8px;
+    right: 12px;
 }
 
 .texto-bloco p {
@@ -97,22 +111,50 @@
 
 /* Texto e imagem lado a lado dentro do bloco */
 .separa {
+
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
+
 }
 
 .texto-bloco-conteudo {
     flex: 1;
 }
 
-/* Segunda imagem da home ao lado do texto */
-.imagem-2 {
-    width: 380px;
-    height: 300px;
-    border-radius: 10px;
-    background-image: url('img/umbanda.jpg');
-    background-size: cover;
-    background-position: center;
-    flex-shrink: 0;
+.Linha{
+
+    position: absolute;
+    background-color: #202020e6;
+    height: 100px;
+    width: 2px;
+    left: 315px;
+    box-shadow: 0px 0px 5px #222222e5;
+
+
+}
+
+.historia-texto {
+
+    display: flex;
+    justify-content: center;
+    
+}
+
+.historia-texto h1 {
+
+    position: relative;
+    left: 170px;
+    font-size: 30px;
+    
+
+}
+
+.historia-texto p {
+
+    position: relative;
+    margin-top: 50px;
+    right: 500px;
+    
+
 }

@@ -1,4 +1,5 @@
-/* RESET GERAL */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;900&family=Montserrat:wght@400;700;800&family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
 * {
     margin: 0;
@@ -7,7 +8,7 @@
 }
 
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: small;
     background-color: #f5f5f0;
 }
@@ -17,50 +18,66 @@ body {
 /* Cabeçalho verde com navbar flexbox */
 header {
     background-color: #2d6a2d;
-    padding: 14px 24px;
+    padding: 8px 24px;
+    border-bottom: 8px solid #1e4d1eb6;
+    border-radius: 15px;
 }
 
 /* Logo e links separados nas extremidades */
 .navbar {
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 70px;
 }
 
 /* Ícone e nome do site em linha */
 .logo {
+
     display: flex;
     align-items: center;
     gap: 10px;
     color: #ffffff;
     font-size: large;
+    font-family: 'Great Vibes', cursive; 
+    font-size: 32px;
 }
 
 .logo-icone {
-    font-size: 24px;
+
+    font-size: 34px;
+
 }
 
 /* Links da navbar em linha */
 .nav-links {
+
     display: flex;
     gap: 10px;
     align-items: center;
+
 }
 
 .nav-links a {
+
     color: #ffffff;
     text-decoration: none;
-    padding: 6px 16px;
+    padding: 9px 19px;
     border: 1.5px solid rgba(255, 255, 255, 0.4);
     border-radius: 6px;
+
 }
 
 .nav-links a:hover {
+
     background-color: rgba(255, 255, 255, 0.15);
+
 }
 
 /* Destaca o link da página atual */
 .nav-links a.ativo {
+
     background-color: rgba(255, 255, 255, 0.2);
     border-color: #ffffff;
     font-weight: bold;
@@ -68,6 +85,7 @@ header {
 
 /* Botão de cadastro com fundo branco */
 .nav-links a.button-entrar {
+
     background-color: #ffffff;
     color: #2d6a2d;
     font-weight: bold;
@@ -76,14 +94,18 @@ header {
 /* FOOTER */
 
 footer {
+
     background-color: #1e4d1e;
     color: #c8e6c9;
     padding: 2.5rem 2rem 1rem;
     margin-top: 2rem;
+    border-top: 10px solid #0000007e;
+    border-radius: 15px;
 }
 
 /* 4 colunas lado a lado */
 .footer-grid {
+
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
@@ -91,6 +113,7 @@ footer {
 
 /* Cada coluna ocupa espaço igual */
 .footer-col {
+
     flex: 1;
     min-width: 180px;
     display: flex;
@@ -99,6 +122,7 @@ footer {
 }
 
 .footer-col h4 {
+
     font-size: 0.85rem;
     font-weight: bold;
     color: #ffffff;
@@ -108,12 +132,15 @@ footer {
 }
 
 .footer-col p {
+
     font-size: 0.85rem;
     color: #a5d6a7;
     line-height: 1.8;
+
 }
 
 .footer-col a {
+
     font-size: 0.85rem;
     color: #a5d6a7;
     text-decoration: none;
@@ -121,11 +148,14 @@ footer {
 }
 
 .footer-col a:hover {
+
     color: #ffffff;
+
 }
 
 /* Cor diferenciada para "Axé a todos!" */
 .axe {
+
     color: #66a167;
     margin-top: 8px;
 }
@@ -133,6 +163,7 @@ footer {
 /* FORMULÁRIO DE SUGESTÃO */
 
 .sugestao-form {
+
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -140,6 +171,7 @@ footer {
 
 .sugestao-form input,
 .sugestao-form textarea {
+
     padding: 7px 10px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
@@ -151,13 +183,17 @@ footer {
 
 .sugestao-form input::placeholder,
 .sugestao-form textarea::placeholder {
+
     color: rgba(255, 255, 255, 0.4);
+
 }
 
 .sugestao-form input:focus,
 .sugestao-form textarea:focus {
+
     outline: none;
     border-color: rgba(255, 255, 255, 0.5);
+    
 }
 
 .sugestao-form textarea {
