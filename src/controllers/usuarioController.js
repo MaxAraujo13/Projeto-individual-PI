@@ -33,7 +33,7 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
     var entidade = req.body.entidadeServer;
-    var obrigacoes = req.body.obrigacoesServer;
+    var estado = req.body.estadoServer;
 
     // Validações dos valores recebidos
     if (nome == undefined) {
@@ -44,13 +44,12 @@ function cadastrar(req, res) {
         res.status(400).send("Sua senha está undefined!");
     } else if (entidade == undefined) {
         res.status(400).send("Sua entidade está undefined!");
-    } else if (obrigacoes == undefined) {
-        res.status(400).send("Suas obrigações estão undefined!");
+    } else if (estado == undefined) {
+        res.status(400).send("Seu estado está undefined!");
     } else {
-        // Converte o valor do select para S ou N conforme o banco (CHAR(1))
-        var obrigacaoConvertida = (obrigacoes === 'Sim') ? 'S' : 'N';
+      
 
-        usuarioModel.cadastrar(nome, email, senha, entidade, obrigacaoConvertida)
+        usuarioModel.cadastrar(nome, email, senha, entidade, estado)
             .then(
                 function (resultado) {
                     res.status(201).json(resultado);
