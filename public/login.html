@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Greenlight - Login</title>
-    <link rel="stylesheet" href="./css/loginUmbanda.css">
+    <link rel="stylesheet" href="./css/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
@@ -30,15 +30,15 @@
                 <form>
                     <div class="input-group">
                         <label>E-mail</label>
-                        <input type="email" id="ipt_email" placeholder="Seu @email.com">
+                        <input type="email" id="input_email" placeholder="Seu @email.com">
                     </div>
 
                     <div class="input-group">
                         <label>Senha</label>
-                        <input type="password" id="ipt_senha" placeholder="Sua senha">
+                        <input type="password" id="input_senha" placeholder="Sua senha">
                     </div>
 
-                    <button type="button" class="btn-login" onclick="fLogin()">Entrar</button>
+                    <button type="button" class="btn-login" onclick="login()">Entrar</button>
                 </form>
 
                 <p class="signup-text">Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></p>
@@ -50,46 +50,17 @@
 
 </html>
 <script>
+    function login() {
+        let emailDigitado = input_email.value
+        let senhaDigitada = input_senha.value
+        let email = 'fernando.brandao@estufasverdes.com'
+        let senha = 'Clara#PI04'
 
 
-
-    function fLogin() {
-
-        let email = ipt_email.value;
-        let senha = ipt_senha.value;
-
-        if (email == "" || senha == "") {
-            alert('Por favor, preencha todos os campos!');
-            return;
+        if (senha == senhaDigitada && email == emailDigitado) {
+            window.location.assign("./dashboard.html")
+        } else {
+            alert('Email/Senha inválido!')
         }
-
-        let corpo = {
-            emailServer: email,
-            senhaServer: senha
-        };
-
-        fetch('/usuarios/autenticar', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(corpo)
-        })
-            .then(function (resposta) {
-                if (resposta.status == 200) {
-                    setTimeout(() => location.href = "tela-entidades.html", 700)
-
-                } else {
-                    alert('E-mail e/ou senha inválidos. Verifique seus dados e tente novamente.');
-                }
-            })
-            .catch(function (erro) {
-                console.log('Erro na chamada à API: ', erro);
-                alert('Erro de conexão com o servidor.');
-            });
-
     }
-
-
-
 </script>

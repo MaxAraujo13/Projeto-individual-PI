@@ -1,87 +1,163 @@
-/* LOGIN */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Centraliza o card na tela */
-.area {
+:root {
+    --verde-principal: #2d6a2d;
+    --verde-escuro: #245424;
+    --cinza-texto: #666666;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.main-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.banner-side {
+    position: relative;
+    width: 50%;
+    flex: 0 0 50%;
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), 
+    url('img/umbanda.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end; 
+    padding: 8% 10%;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 8px -8px 10px #323131e6;
+    height: 717px;
+    margin-top: 8px;
+    left: 8px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.logo img {
+    width: 200px;
+}
+
+.logo-img {
+    width: 300px; 
+    height: auto;
+    filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.3));
+}
+
+.banner-content h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.banner-content p {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 450px;
+}
+
+.banner-content .legenda-verde {
+    font-size: 20px;
+    line-height: 1.5;
+    color: #70b970;
+    max-width: 450px;
+}
+
+.form-side {
+    width: 50%;
+    flex: 0 0 50%;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3rem 2rem;
-    min-height: 400px;
+    padding: 40px;
 }
 
-/* Card branco do formulário */
-.card {
-    background-color: #ffffff;
-    border: 1px solid #d0d0c8;
-    border-radius: 12px;
-    padding: 2rem 2.5rem;
+.form-box {
     width: 100%;
     max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
 }
 
-.card h2 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #2d6a2d;
-    text-align: center;
+.form-box h2 {
+    color: var(--verde-escuro);
+    font-size: 32px;
+    font-weight: 700;
     margin-bottom: 10px;
 }
 
-.card label {
-    font-size: 0.85rem;
-    color: #555555;
-    margin-top: 6px;
+.input-group {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.card input {
-    padding: 8px 12px;
-    border: 1px solid #bbbbbb;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    background-color: #fafaf8;
-    font-family: "Open Sans", sans-serif;
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
 }
 
-.card input:focus {
-    outline: none;
-    border-color: #2d6a2d;
-}
-
-/* Botão principal de login */
-.botao {
+input {
     width: 100%;
-    padding: 10px;
-    background-color: #2d6a2d;
-    color: #ffffff;
+    padding: 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background-color: #f9fafb;
+    font-size: 16px;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--verde-principal);
+    color: white;
     border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: bold;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 30px;
     cursor: pointer;
-    margin-top: 10px;
+    transition: 0.3s;
 }
 
-.botao:hover {
-    background-color: #245424;
+.btn-login:hover {
+
+    transform: scale(1);
+    box-shadow: 0px 6px 12px rgba(32, 86, 24, 0.902);
+
 }
 
-/* Link para a página de cadastro */
-.rodape {
+.btn-login:active{
+    
+    transform: scale(0.98);
+    box-shadow: 0px 6px 12px rgba(32, 86, 24, 0.902);
+
+}
+
+.signup-text {
+    margin-top: 20px;
     text-align: center;
-    font-size: 0.85rem;
-    color: #666666;
-    margin-top: 6px;
+    color: var(--cinza-texto);
+    font-size: 14px;
 }
 
-.rodape a {
-    color: #2d6a2d;
-    font-weight: bold;
+.signup-text a {
+    color: var(--verde-principal);
     text-decoration: none;
-}
-
-.rodape a:hover {
-    text-decoration: underline;
+    font-weight: 700;
 }
