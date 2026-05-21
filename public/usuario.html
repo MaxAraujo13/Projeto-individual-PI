@@ -74,7 +74,7 @@
                     <div class="input-group">
                         <label>Confirmar Senha</label>
                         <div class="password-wrapper">
-                            <input type="password" id="ipt_senhaDnv" placeholder="Repita a senha">
+                            <input type="password" oninput="fSenha()" id="ipt_senhaDnv" placeholder="Repita a senha">
                         </div>
                     </div>
 
@@ -242,9 +242,13 @@
 
             let nome = ipt_nome.value;
 
-            let email = fEmail();
+            let email = ipt_email.value;
 
-            let senha = fSenha(); // pega o valor que a function retornou, otimiza o código
+            let senha = ipt_senha.value;
+
+            let emailOk = fEmail();
+
+            let senhaOk = fSenha(); // pega o valor que a function retornou, otimiza o código
 
             let senhaDnv = ipt_senhaDnv.value;
 
