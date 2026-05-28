@@ -55,23 +55,24 @@
             </section>
 
             <div class="separa">
-            <!-- Gráfico de barras: acessos por entidade -->
-            <section class="grafico-section">
-                <h2>Suas entidades mais visitadas</h2>
-                <div id="grafico_aviso">Parece que você ainda não visitou nenhuma entidade. Explore a tela de entidades!</div>
-                <div class="grafico-container">
-                    <canvas id="graficoAcessos"></canvas>
-                </div>
-            </section>
+                <!-- Gráfico de barras: acessos por entidade -->
+                <section class="grafico-section">
+                    <h2>Suas entidades mais visitadas</h2>
+                    <div id="grafico_aviso">Parece que você ainda não visitou nenhuma entidade. Explore a tela de
+                        entidades!</div>
+                    <div class="grafico-container">
+                        <canvas id="graficoAcessos"></canvas>
+                    </div>
+                </section>
 
-            <!-- Gráfico de pizza: distribuição de frenteiros -->
-            <section class="grafico-section-pizza">
-                <h2>Distribuição de frenteiros entre os usuários</h2>
-                <div id="grafico_pizza_aviso">Nenhum dado disponível ainda.</div>
-                <div class="grafico-container">
-                    <canvas id="graficoPizza" style="display: none;"></canvas>
-                </div>
-            </section>
+                <!-- Gráfico de pizza: distribuição de frenteiros -->
+                <section class="grafico-section-pizza">
+                    <h2>Distribuição de frenteiros entre os usuários</h2>
+                    <div id="grafico_pizza_aviso">Nenhum dado disponível ainda.</div>
+                    <div class="grafico-container">
+                        <canvas id="graficoPizza" style="display: none;"></canvas>
+                    </div>
+                </section>
 
             </div>
 
@@ -79,316 +80,339 @@
 
     </div>
 
-<script>
+    <script>
 
-    function AtualizarNome() {
+          let CORES_ENTIDADES = {// do gráfico de pizza
+            "pretoVelho": "rgba(180, 180, 180, 0.8)",
+            "caboclo": "rgba( 27,  94,  32, 0.8)",
+            "boiadeiro": "rgba(101,  67,  33, 0.8)",
+            "ere": "rgba(255, 182, 193, 0.8)",
+            "marujo": "rgba(100, 181, 246, 0.8)",
+            "baiano": "rgba(255, 214,   0, 0.8)",
+            "cigano": "rgba(128,   0, 128, 0.8)",
+            "exu": "rgba(  0,   0,   0, 0.8)",
+            "pombagira": "rgba(139,   0,   0, 0.8)",
+            "malandro": "rgba(229,  57,  53, 0.8)",
+            "nao": "rgba(150, 150, 150, 0.8)"
+        };
 
-        let nome = sessionStorage.NOME_USUARIO;
+        function AtualizarNome() {
 
-        b_usuario.innerHTML = nome;
+            let nome = sessionStorage.NOME_USUARIO;
 
-        let idUsuario = sessionStorage.ID_USUARIO;
+            b_usuario.innerHTML = nome;
 
-        if (!idUsuario || !nome) {
+            let idUsuario = sessionStorage.ID_USUARIO;
 
-            alert('Usuário não encontrado, tente novamente.');
+            if (!idUsuario || !nome) {
 
-            window.location = "../loginUmbanda.html"
+                alert('Usuário não encontrado, tente novamente.');
 
-            console.log("Usuário não está logado.");
+                window.location = "../loginUmbanda.html"
 
-            return;
+                console.log("Usuário não está logado.");
+
+                return;
+
+            }
+
+            carregarGrafico(idUsuario);
+
+            carregarKpiFrenteiro(idUsuario);
+
+            carregarKpiCruzadinha(idUsuario);
+
+            carregarGraficoPizza();
+        }
+
+        // Gráfico de barras: acessos por entidade 
+        function carregarGrafico(idUsuario) {
+
+            fetch(`/dashboard/acessos/${idUsuario}`, { cache: "no-store" })
+                .then(function (response) {
+
+                    if (response.ok) {
+
+                        response.json().then(function (dados) {
+
+                            grafico_aviso.style.display = "none";
+
+                            graficoAcessos.style.display = "block";
+
+                            plotarGrafico(dados);
+
+                        });
+                    } else if (response.status === 204) {
+
+                        grafico_aviso.style.display = "block";
+
+                        graficoAcessos.style.display = "none";
+
+                    } else {
+
+                        console.error("Nenhum dado encontrado ou erro na API");
+                    }
+                })
+                .catch(function (erro) {
+
+                    console.error("Erro ao carregar gráfico:", erro.message);
+
+                });
 
         }
 
-        carregarGrafico(idUsuario);
+        function plotarGrafico(dados) {
 
-        carregarKpiFrenteiro(idUsuario);
+            let labels = [];
 
-        carregarKpiCruzadinha(idUsuario);
+            let valores = [];
 
-        carregarGraficoPizza();
-    }
+            let cores = [];
 
-    // Gráfico de barras: acessos por entidade 
-    function carregarGrafico(idUsuario) {
+            let totalUsuarios = 0
 
-        fetch(`/dashboard/acessos/${idUsuario}`, { cache: "no-store" })
-            .then(function (response) {
+            let totalAcesso = 0;
 
-                if (response.ok) {
+            for (let i = 0; i < dados.length; i++) {
 
-                    response.json().then(function (dados) {
+                labels.push(dados[i].entidade_acessada);
 
-                        grafico_aviso.style.display = "none";
+                valores.push(dados[i].total);
 
-                        graficoAcessos.style.display = "block";
+                totalUsuarios = totalUsuarios + dados[i].total;
 
-                        plotarGrafico(dados);
+                cores.push(CORES_ENTIDADES[dados[i].entidade_acessada]);
+                
+            };
 
-                    });
-                } else if (response.status === 204) {
-
-                    grafico_aviso.style.display = "block";
-
-                    graficoAcessos.style.display = "none";
-
-                } else {
-
-                    console.error("Nenhum dado encontrado ou erro na API");
-                }
-            })
-            .catch(function (erro) {
-
-                console.error("Erro ao carregar gráfico:", erro.message);
-
-            });
-    }
-
-    let CORES_ENTIDADES = {
-        "Preto Velho": "rgba(180, 180, 180, 0.8)",
-        "Caboclo": "rgba( 27,  94,  32, 0.8)",
-        "Boiadeiro": "rgba(101,  67,  33, 0.8)",
-        "Erê": "rgba(255, 182, 193, 0.8)",
-        "Marinheiro": "rgba(100, 181, 246, 0.8)",
-        "Baiano": "rgba(255, 214,   0, 0.8)",
-        "Povo Cigano": "rgba(128,   0, 128, 0.8)",
-        "Exu": "rgba(  0,   0,   0, 0.8)",
-        "Pombagira": "rgba(139,   0,   0, 0.8)",
-        "Malandros": "rgba(229,  57,  53, 0.8)"
-    };
-
-    function plotarGrafico(dados) {
-
-        let labels = dados.map(function (d) { return d.entidade_acessada; });
-
-        let valores = dados.map(function (d) { return d.total; });
-
-        let cores = labels.map(function (nome) {
-
-            return CORES_ENTIDADES[nome];
-        });
-
-        new Chart(document.getElementById("graficoAcessos"), {
-            type: "bar",
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: "Acessos",
-                    data: valores,
-                    backgroundColor: cores,
-                    borderColor: "rgba(255,255,255,0.2)",
-                    borderWidth: 1,
-                    borderRadius: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: { mode: "index" }
+            new Chart(document.getElementById("graficoAcessos"), {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Acessos",
+                        data: valores,
+                        backgroundColor: cores,
+                        borderColor: "rgba(255,255,255,0.2)",
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
                 },
-                scales: {
-                    x: {
-                        ticks: { color: "rgba(255,255,255,0.8)" },
-                        grid: { color: "rgba(255,255,255,0.06)" }
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { mode: "index" }
                     },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: "rgba(255,255,255,0.8)",
-                            stepSize: 1
+                    scales: {
+                        x: {
+                            ticks: { color: "rgba(255,255,255,0.8)" },
+                            grid: { color: "rgba(255,255,255,0.06)" }
                         },
-                        grid: { color: "rgba(255,255,255,0.06)" }
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: "rgba(255,255,255,0.8)",
+                                stepSize: 1
+                            },
+                            grid: { color: "rgba(255,255,255,0.06)" }
+                        }
                     }
                 }
-            }
-        });
-    }
-
-    function carregarKpiFrenteiro(idUsuario) {
-
-        fetch(`/dashboard/frenteiro/${idUsuario}`, { cache: "no-store" })
-            .then(function (response) {
-
-                if (response.ok) {
-
-                    response.json().then(function (dado) {
-
-                        kpi_frenteiro.innerHTML = dado.total_mesmo_frenteiro;
-
-                        let frase = {
-
-                            pretoVelho: "Possuem Preto velhos como frenteiro!",
-                            caboclo: "Possuem Caboclos como frenteiro!",
-                            boiadeiro: "Possuem Boiadeiros como frenteiro!",
-                            ere: "Possuem Preto erês como frenteiro!",
-                            baiano: "Possuem baianos como frenteiro!",
-                            marujo: "Possuem Marujo como frenteiro!",
-                            cigano: "Possuem Cigano como frenteiro!",
-                            malandro: "Possuem Malandros como frenteiro!",
-                            exu: "Possuem Exu como frenteiro!",
-                            pombagira: "Possuem Pombagiras como frenteira!",
-                            nao: "Ainda não conhecem seus frenteiros. E tudo bem!"
-
-                        };
-
-                        let frenteiro = frase[sessionStorage.ENTIDADE_USUARIO];
-
-                        kpi_frenteiro_entidade.innerHTML = frenteiro;
-
-                    });
-                } else {
-
-                    console.error("Nenhum dado encontrado ou erro na API");
-                }
-            })
-            .catch(function (erro) {
-
-                console.log(`Erro ao carregar KPI frenteiro: ${erro.message}`);
-
-                kpi_frenteiro.innerHTML = "—";
-
             });
-    }
 
-    function carregarKpiCruzadinha(idUsuario) {
+        }
 
-        fetch(`/dashboard/cruzadinha/${idUsuario}`, { cache: "no-store" })
-            .then(function (response) {
 
-                if (response.ok) {
+        function carregarKpiFrenteiro(idUsuario) {
 
-                    response.json().then(function (dado) {
+            fetch(`/dashboard/frenteiro/${idUsuario}`, { cache: "no-store" })
+                .then(function (response) {
 
-                        kpi_pontuacao.innerHTML = dado.pontuacao;
+                    if (response.ok) {
 
-                    });
+                        response.json().then(function (dado) {
 
-                } else if (response.status === 204) {
+                            kpi_frenteiro.innerHTML = dado.total_mesmo_frenteiro;
 
-                    kpi_pontuacao.innerHTML = "0";
+                            let frase = {
 
-                    kpi_pontuacao_msg.innerHTML = "Nenhuma partida ainda";
+                                pretoVelho: "Possuem Preto velhos como frenteiro!",
+                                caboclo: "Possuem Caboclos como frenteiro!",
+                                boiadeiro: "Possuem Boiadeiros como frenteiro!",
+                                ere: "Possuem Preto erês como frenteiro!",
+                                baiano: "Possuem baianos como frenteiro!",
+                                marujo: "Possuem Marujo como frenteiro!",
+                                cigano: "Possuem Cigano como frenteiro!",
+                                malandro: "Possuem Malandros como frenteiro!",
+                                exu: "Possuem Exu como frenteiro!",
+                                pombagira: "Possuem Pombagiras como frenteira!",
+                                nao: "Ainda não conhecem seus frenteiros. E tudo bem!"
 
-                } else {
+                            };
 
-                    console.error("Nenhum dado encontrado ou erro na API");
+                            let frenteiro = frase[sessionStorage.ENTIDADE_USUARIO];
 
-                }
-            })
-            .catch(function (erro) {
+                            kpi_frenteiro_entidade.innerHTML = frenteiro;
 
-                console.error(`Erro ao carregar KPI cruzadinha: ${erro.message}`);
+                        });
+                    } else {
 
-                kpi_pontuacao.innerHTML = "—";
-                
-            });
-    }
+                        console.error("Nenhum dado encontrado ou erro na API");
+                    }
+                })
+                .catch(function (erro) {
 
-    // Gráfico de pizza: distribuição de frenteiros entre todos os usuários
-    function carregarGraficoPizza() {
+                    console.log(`Erro ao carregar KPI frenteiro: ${erro.message}`);
 
-        fetch(`/dashboard/distribuicao-frenteiros`, { cache: "no-store" })
-            .then(function (response) {
+                    kpi_frenteiro.innerHTML = "—";
 
-                if (response.ok) {
+                });
+        }
 
-                    response.json().then(function (dados) {
+        function carregarKpiCruzadinha(idUsuario) {
 
-                        grafico_pizza_aviso.style.display = "none";
+            fetch(`/dashboard/cruzadinha/${idUsuario}`, { cache: "no-store" })
+                .then(function (response) {
 
-                        graficoPizza.style.display = "block";
+                    if (response.ok) {
 
-                        plotarGraficoPizza(dados);
+                        response.json().then(function (dado) {
 
-                    });
+                            kpi_pontuacao.innerHTML = dado.pontuacao;
 
-                } else if (response.status === 204) {
+                        });
 
-                    grafico_pizza_aviso.style.display = "block";
+                    } else if (response.status === 204) {
 
-                    graficoPizza.style.display = "none";
+                        kpi_pontuacao.innerHTML = "0";
 
-                } else {
+                        kpi_pontuacao_msg.innerHTML = "Nenhuma partida ainda";
 
-                    console.error("Nenhum dado encontrado ou erro na API");
-                }
-            })
-            .catch(function (erro) {
+                    } else {
 
-                console.error("Erro ao carregar gráfico de pizza:", erro.message);
+                        console.error("Nenhum dado encontrado ou erro na API");
 
-            });
-    }
+                    }
+                })
+                .catch(function (erro) {
 
-    function plotarGraficoPizza(dados) {
+                    console.error(`Erro ao carregar KPI cruzadinha: ${erro.message}`);
 
-        let labels = dados.map(function (d) { return d.entidade; });
+                    kpi_pontuacao.innerHTML = "—";
 
-        let valores = dados.map(function (d) { return d.total; });
+                });
+        }
 
-        // Calcula o total geral para montar as porcentagens no tooltip
-        let totalUsuarios = valores.reduce(function (acumulador, valorAtual) {
+        // Gráfico de pizza: distribuição de frenteiros entre todos os usuários
+        function carregarGraficoPizza() {
 
-            return acumulador + valorAtual;
+            fetch(`/dashboard/distribuicao-frenteiros`, { cache: "no-store" })
+                .then(function (response) {
 
-        }, 0);
+                    if (response.ok) {
 
-        let cores = labels.map(function (nome) {
+                        response.json().then(function (dados) {
 
-            return CORES_ENTIDADES[nome];
-        });
+                            grafico_pizza_aviso.style.display = "none";
 
-        new Chart(document.getElementById("graficoPizza"), {
-            type: "pie",
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: valores,
-                    backgroundColor: cores,
-                    borderColor: "rgba(255,255,255,0.15)",
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: "right",
-                        labels: {
-                            color: "rgba(255,255,255,0.8)",
-                            font: { size: 12 },
-                            padding: 16
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            // Exibe "Nome: X usuários (Y%)"
-                            label: function (contexto) {
+                            graficoPizza.style.display = "block";
 
-                                let valorFatia = contexto.parsed;
+                            plotarGraficoPizza(dados);
 
-                                let porcentagem = ((valorFatia / totalUsuarios) * 100).toFixed(1);
+                        });
 
-                                return ` ${contexto.label}: ${valorFatia} usuários (${porcentagem}%)`;
+                    } else if (response.status === 204) {
+
+                        grafico_pizza_aviso.style.display = "block";
+
+                        graficoPizza.style.display = "none";
+
+                    } else {
+
+                        console.error("Nenhum dado encontrado ou erro na API");
+                    }
+                })
+                .catch(function (erro) {
+
+                    console.error("Erro ao carregar gráfico de pizza:", erro.message);
+
+                });
+        }
+
+        function plotarGraficoPizza(dados) {
+
+            let labels = [];
+
+            let valores = [];
+
+            let cores = [];
+
+            let totalUsuarios = 0
+
+            let totalAcesso = 0;
+
+            for (let i = 0; i < dados.length; i++) {
+
+                labels.push(dados[i].entidade);
+
+                valores.push(dados[i].total);
+
+               totalUsuarios = totalUsuarios + dados[i].total;
+
+                cores.push(CORES_ENTIDADES[dados[i].entidade]);
+
+            };
+
+            new Chart(document.getElementById("graficoPizza"), {
+                type: "pie",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: valores,
+                        backgroundColor: cores,
+                        borderColor: "rgba(255,255,255,0.15)",
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: "right",
+                            labels: {
+                                color: "rgba(255,255,255,0.8)",
+                                font: { size: 12 },
+                                padding: 16
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                // Exibe "Nome: X usuários (Y%)"
+                                label: function (contexto) {
+
+                                    let valorFatia = contexto.parsed;
+
+                                    let porcentagem = ((valorFatia / totalUsuarios) * 100).toFixed(1);
+
+                                    return ` ${contexto.label}: ${valorFatia} usuários (${porcentagem}%)`;
+                                }
                             }
                         }
                     }
                 }
-            }
-        });
-    }
+            });
+        }
 
-    function limparSessao() { // feita pra limpar o storage 
-            
-        sessionStorage.clear();
+        function limparSessao() { // feita pra limpar o storage 
 
-        window.location = "../loginUmbanda.html";
-    }
+            sessionStorage.clear();
 
-</script>
+            window.location = "../loginUmbanda.html";
+        }
+
+    </script>
 
 </body>
 
