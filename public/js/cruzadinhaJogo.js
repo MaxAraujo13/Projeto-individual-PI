@@ -1,36 +1,42 @@
-// Importa as palavras do arquivo palavras.js (deve ser carregado antes deste script)
-// listaPalavras vem de palavras.js
 
-let celulasPreenchidas = []; // guarda cada celula {linha, coluna, letraCorreta, inputElement}
+let celulasPreenchidas = []; // guarda cada celula (linha, coluna, letraCorreta, inputElement) Feito para as palavras que se cruzam  
+//Evita do código criar dois inputs na mesma celula. consulta o array quando precisa verificar alguma letr.
+//Usado para comparar as respostas do usuario, limpar a cruzadinha e localizar um input pot coordenada.
 
-// ── Monta o grid ao carregar a página
-function iniciarCruzadinha() {
 
-    let gridElement = document.getElementById("grid_cruzadinha");
 
-    let numeroDeColunas = calcularNumeroDeColunas();
+function iniciarCruzadinha() {  // Monta o grid (layout de duas dimensões responsivo) ao carregar a página
+                                // percorre a linhaAtual e a colunaAtual de 0 até o total. Cria uma célula nova e adiciona.
 
-    let numeroDeLinhas = calcularNumeroDeLinhas();
 
-    gridElement.style.gridTemplateColumns = `repeat(${numeroDeColunas}, 36px)`;
+    let gridElement = grid_cruzadinha; // div do grid no html
 
-    // Cria todas as celulas vazias primeiro
-    for (let linhaAtual = 0; linhaAtual < numeroDeLinhas; linhaAtual++) {
+    let numeroDeColunas = calcularNumeroDeColunas(); // calcula a quantidade de colunas a partir das palavras do palavras.js
+
+    let numeroDeLinhas = calcularNumeroDeLinhas(); // numero de linhas (no grid não tem tamanho fixo)
+
+    gridElement.style.gridTemplateColumns = `repeat(${numeroDeColunas}, 36px)`; // adiciona uma classe no css.
+
+
+    for (let linhaAtual = 0; linhaAtual < numeroDeLinhas; linhaAtual++) {  // Cria todas as celulas vazias primeiro
 
         for (let colunaAtual = 0; colunaAtual < numeroDeColunas; colunaAtual++) {
 
-            let celula = document.createElement("div");
+            let celula = document.createElement("div"); // comando pro js criar coisas no html. genial
 
-            celula.classList.add("celula-vazia");
+            celula.classList.add("celula-vazia"); // adiciona ou remove classes no css, sem mexer no resto
 
-            celula.dataset.linha = linhaAtual;
-            celula.dataset.coluna = colunaAtual;
+            celula.dataset.linha = linhaAtual; // define a posição da célula (div) para identificar
 
-            gridElement.appendChild(celula);
+            celula.dataset.coluna = colunaAtual; // a linha ou coluna que ela pertence (evita perder)
+
+            gridElement.appendChild(celula); // coloca o elemento na página como filho da div princpal (grid). Não aparece sem ele.
+            // o grif usa a ordem dos filhos pra arrumar a posição
         }
     }
 
     // Preenche as celulas com letras das palavras
+
     for (let indicePalavra = 0; indicePalavra < listaPalavras.length; indicePalavra++) {
 
         let palavraAtual = listaPalavras[indicePalavra];
@@ -38,10 +44,12 @@ function iniciarCruzadinha() {
         preencherPalavraNoGrid(palavraAtual, gridElement, numeroDeColunas);
     }
 
+    // chama para colocar o numero da dica do lado
+
     renderizarNumerosDasDicas(gridElement, numeroDeColunas);
 }
 
-// Retorna a maior coluna ocupada + 1
+// calcula a quantidade de colunas necessárias 
 function calcularNumeroDeColunas() {
 
     let maiorColuna = 0;
@@ -53,18 +61,22 @@ function calcularNumeroDeColunas() {
         let colunaFinal = palavraAtual.coluna;
 
         if (palavraAtual.dir === "H") {
+
             colunaFinal = palavraAtual.coluna + palavraAtual.palavra.length - 1;
         }
 
         if (colunaFinal > maiorColuna) {
+
             maiorColuna = colunaFinal;
+
         }
     }
 
-    return maiorColuna + 1;
+    return maiorColuna + 1; // faz o grid retornar o tamanho certo
 }
 
-// Retorna a maior linha ocupada + 1
+// calcula a quantidade de linhas necessárias
+
 function calcularNumeroDeLinhas() {
 
     let maiorLinha = 0;
@@ -76,11 +88,15 @@ function calcularNumeroDeLinhas() {
         let linhaFinal = palavraAtual.linha;
 
         if (palavraAtual.dir === "V") {
+
             linhaFinal = palavraAtual.linha + palavraAtual.palavra.length - 1;
+
         }
 
         if (linhaFinal > maiorLinha) {
+
             maiorLinha = linhaFinal;
+
         }
     }
 
@@ -88,54 +104,76 @@ function calcularNumeroDeLinhas() {
 }
 
 // Coloca os inputs no grid para cada letra da palavra
+
 function preencherPalavraNoGrid(palavraObj, gridElement, numeroDeColunas) {
 
     for (let indiceletra = 0; indiceletra < palavraObj.palavra.length; indiceletra++) {
 
         let linhaDestino = palavraObj.linha;
+
         let colunaDestino = palavraObj.coluna;
 
         if (palavraObj.dir === "H") {
+
             colunaDestino = palavraObj.coluna + indiceletra;
+
         } else {
+
             linhaDestino = palavraObj.linha + indiceletra;
+
         }
 
         let posicaoNoGrid = (linhaDestino * numeroDeColunas) + colunaDestino;
 
-        let celulaExistente = gridElement.children[posicaoNoGrid];
+        let celulaExistente = gridElement.children[posicaoNoGrid]; //
 
         // Só cria o input se a celula ainda não tiver um
-        if (celulaExistente && !celulaExistente.querySelector("input")) {
 
-            celulaExistente.classList.remove("celula-vazia");
+        if (celulaExistente && !celulaExistente.querySelector("input")) { // verifica se já existe ou não um input em cada célula
+            //evita problemas de cruzamento entre as palavras
+
+            celulaExistente.classList.remove("celula-vazia"); // remove uma classe do css
+
             celulaExistente.classList.add("celula-ativa");
 
             let campoletra = document.createElement("input");
 
-            campoletra.type = "text";
-            campoletra.maxLength = 1;
+            campoletra.type = "text"; // especifica o tipo do input
+
+            campoletra.maxLength = 1; // define o tamanho total. Evita estourar o layout
+
             campoletra.classList.add("input-letra");
+
             campoletra.dataset.linha = linhaDestino;
+
             campoletra.dataset.coluna = colunaDestino;
+
             campoletra.dataset.letraCorreta = palavraObj.palavra[indiceletra];
 
-            campoletra.addEventListener("input", aoDigitarLetra);
+            campoletra.addEventListener("input", aoDigitarLetra); //chama a função de digitar e recebe o input como parametro
+            //input: pra tranformar as células em input, conforme elas forem criadas
 
             celulaExistente.appendChild(campoletra);
 
             // Registra a celula para verificação posterior
+
             celulasPreenchidas.push({
+
                 linha: linhaDestino,
+
                 coluna: colunaDestino,
+
                 letraCorreta: palavraObj.palavra[indiceletra],
+
                 inputElement: campoletra
+
             });
         }
     }
 }
 
 // Coloca o numero da dica no canto da primeira celula de cada palavra
+
 function renderizarNumerosDasDicas(gridElement, numeroDeColunas) {
 
     for (let i = 0; i < listaPalavras.length; i++) {
@@ -151,7 +189,8 @@ function renderizarNumerosDasDicas(gridElement, numeroDeColunas) {
             let numeroDica = document.createElement("span");
 
             numeroDica.classList.add("numero-dica");
-            numeroDica.textContent = palavraAtual.id;
+
+            numeroDica.innerHTML = palavraAtual.id; // mexe no html por inteiro e ignora as tags. Div pai = div filho
 
             primeiracelula.appendChild(numeroDica);
         }
@@ -159,22 +198,25 @@ function renderizarNumerosDasDicas(gridElement, numeroDeColunas) {
 }
 
 // Avança o foco para a proxima celula ao digitar
-function aoDigitarLetra(evento) {
 
-    let inputAtual = evento.target;
+function aoDigitarLetra(evento) { // usa o .dataset para saber onde avançar o focus e navegar pelas células automaticamente
+
+    let inputAtual = evento.target; // localiza o input q o usuario interagiu 
 
     inputAtual.value = inputAtual.value.toUpperCase();
 
     let linhaAtual = Number(inputAtual.dataset.linha);
+
     let colunaAtual = Number(inputAtual.dataset.coluna);
 
     // Tenta avançar para direita, senão para baixo
+
     let proximoInput = buscarInputNaPosicao(linhaAtual, colunaAtual + 1)
-        || buscarInputNaPosicao(linhaAtual + 1, colunaAtual);
+        || buscarInputNaPosicao(linhaAtual + 1, colunaAtual); // pode usar porta or fora do if
 
     if (proximoInput) {
 
-        proximoInput.focus();
+        proximoInput.focus(); // move o cursor automaticamente enquanto o usuario digita
     }
 }
 
@@ -187,38 +229,44 @@ function buscarInputNaPosicao(linhaAlvo, colunaAlvo) {
 
         if (celulaAtual.linha === linhaAlvo && celulaAtual.coluna === colunaAlvo) {
 
-            return celulaAtual.inputElement;
+            return celulaAtual.inputElement; 
         }
     }
 
     return null;
 }
 
-// ── Verifica as respostas e calcula pontuacao
+// Verifica as respostas e calcula pontuacao
+
 function verificarRespostas() {
 
     // Primeiro marca todas as letras como certas ou erradas
+
     for (let i = 0; i < celulasPreenchidas.length; i++) {
 
         let celulaAtual = celulasPreenchidas[i];
 
         let letraDigitada = celulaAtual.inputElement.value.toUpperCase();
+
         let letraEsperada = celulaAtual.letraCorreta.toUpperCase();
 
         if (letraDigitada === letraEsperada) {
 
             celulaAtual.inputElement.classList.remove("letra-errada");
+
             celulaAtual.inputElement.classList.add("letra-certa");
 
         } else {
 
             celulaAtual.inputElement.classList.remove("letra-certa");
+
             celulaAtual.inputElement.classList.add("letra-errada");
         }
     }
 
     // Conta quantas palavras estão completamente certas
-    let totalPalavrasCertas = 0;
+
+    let totalPalavrasCertas = -1;
 
     for (let indicePalavra = 0; indicePalavra < listaPalavras.length; indicePalavra++) {
 
@@ -227,13 +275,14 @@ function verificarRespostas() {
         let palavraCorreta = verificarPalavraCompleta(palavraAtual);
 
         if (palavraCorreta) {
+
             totalPalavrasCertas++;
         }
     }
 
     let pontuacaoFinal = totalPalavrasCertas * 100;
 
-    resultado_pontuacao.textContent =
+    resultado_pontuacao.innerHTML =
         `Você acertou ${totalPalavrasCertas} de ${listaPalavras.length} palavras! — ${pontuacaoFinal} pontos`;
 
     enviarPontuacao(pontuacaoFinal);
@@ -245,58 +294,77 @@ function verificarPalavraCompleta(palavraObj) {
     for (let indiceletra = 0; indiceletra < palavraObj.palavra.length; indiceletra++) {
 
         let linhaDestino = palavraObj.linha;
+
         let colunaDestino = palavraObj.coluna;
 
         if (palavraObj.dir === "H") {
+
             colunaDestino = palavraObj.coluna + indiceletra;
+
         } else {
+
             linhaDestino = palavraObj.linha + indiceletra;
         }
 
         let inputDaLetra = buscarInputNaPosicao(linhaDestino, colunaDestino);
 
-        if (!inputDaLetra) return false;
+        if (!inputDaLetra) {
+
+            return false;
+
+        }
+
 
         let letraDigitada = inputDaLetra.value.toUpperCase();
+
         let letraEsperada = palavraObj.palavra[indiceletra].toUpperCase();
 
-        if (letraDigitada !== letraEsperada) return false;
+        if (letraDigitada !== letraEsperada) {
+
+            return false;
+        }
+
+        return true;
     }
 
-    return true;
 }
 
-// ── Limpa todos os inputs e marcações
-function limparCruzadinha() {
+ // Limpa todos os inputs e marcações
 
-    for (let i = 0; i < celulasPreenchidas.length; i++) {
+    function limparCruzadinha() {
 
-        let celulaAtual = celulasPreenchidas[i];
+        for (let i = 0; i < celulasPreenchidas.length; i++) {
 
-        celulaAtual.inputElement.value = "";
-        celulaAtual.inputElement.classList.remove("letra-certa", "letra-errada");
+            let celulaAtual = celulasPreenchidas[i];
+
+            celulaAtual.inputElement.value = "";
+
+            celulaAtual.inputElement.classList.remove("letra-certa", "letra-errada");
+        }
+
+        resultado_pontuacao.innerHTML = "";
     }
 
-    resultado_pontuacao.textContent = "";
-}
 
-// ── Monta a lista de dicas na sidebar de dicas
+// Monta a lista de dicas no ladinho
 function renderizarDicas() {
 
-    let listaHorizontais = document.getElementById("lista_horizontais");
-    let listaVerticais = document.getElementById("lista_verticais");
+    let listaHorizontais = lista_horizontais;
+
+    let listaVerticais = lista_verticais;
 
     for (let i = 0; i < listaPalavras.length; i++) {
 
         let palavraAtual = listaPalavras[i];
 
-        let itemDica = document.createElement("li");
+        let itemDica = document.createElement("li");                        
 
         itemDica.classList.add("item-dica");
 
         itemDica.innerHTML = `<b>${palavraAtual.id}.</b> ${palavraAtual.dica}`;
 
         // Ao clicar na dica, destaca a primeira celula da palavra
+
         itemDica.addEventListener("click", function () {
 
             let inputInicio = buscarInputNaPosicao(palavraAtual.linha, palavraAtual.coluna);
@@ -304,7 +372,8 @@ function renderizarDicas() {
             if (inputInicio) {
 
                 inputInicio.focus();
-                inputInicio.scrollIntoView({ behavior: "smooth", block: "center" });
+
+                inputInicio.scrollIntoView({ behavior: "smooth", block: "center" }); // rola a página junto com o focus pra ficar centralizadinho
             }
         });
 
@@ -314,12 +383,12 @@ function renderizarDicas() {
 
         } else {
 
-            listaVerticais.appendChild(itemDica);
+            listaVerticais.appendChild(itemDica);//
         }
     }
 }
 
-// ── Envia pontuação para a API
+// Envia pontuação para a API
 function enviarPontuacao(pontuacao) {
 
     let idUsuario = sessionStorage.ID_USUARIO;
@@ -333,14 +402,14 @@ function enviarPontuacao(pontuacao) {
     }
 
     if (!idUsuario) {
-        
+
         return;
     }
 
     fetch(`/cruzadinha/enviarPontuacao`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        
+
         body: JSON.stringify(corpo)
     })
         .then(function (resposta) {

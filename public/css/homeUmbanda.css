@@ -139,12 +139,13 @@ html {
 
     display: flex;
     justify-content: center;
+    align-items: center;
     
 }
 
 .historia-texto h1 {
 
-    position: relative;
+display: flex;
     left: 170px;
     font-size: 30px;
     
@@ -153,9 +154,6 @@ html {
 
 .historia-texto p {
 
-    position: relative;
-    margin-top: 50px;
-    right: 500px;
-    
+    display: flex;    
 
 }
