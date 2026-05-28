@@ -15,6 +15,7 @@ var app = express();
 var sugestaoRouter    = require("./src/routes/sugestao");
 var usuarioRouter  = require("./src/routes/usuarios");
 var dashboardRouter = require("./src/routes/dashboard-routes");
+var cruzadinhaRouter = require("./src/routes/cruzadinha")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -25,6 +26,7 @@ app.use(cors());
 app.use("/usuarios", usuarioRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/sugestao", sugestaoRouter);
+app.use("/cruzadinha", cruzadinhaRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

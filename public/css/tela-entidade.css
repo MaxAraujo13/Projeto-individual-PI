@@ -168,6 +168,7 @@
 
 /* Segunda imagem da home ao lado do texto */
 .imagem-2 {
+
     width: 380px;
     height: 300px;
     border-radius: 10px;
@@ -180,6 +181,68 @@
 
 }
 
+.imagem-eu{
+
+ 
+    width: 380px;
+    height: 300px;
+    border-radius: 10px;
+    background-image: url('img/imagem-eu.jpg');
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    box-shadow: 0px 0px 10px #000000;
+    position: relative;
+
+
+}
+
+.imagem-pai{
+
+    
+    width: 380px;
+    height: 300px;
+    border-radius: 10px;
+    background-image: url('img/imagem-pai.jpeg');
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    box-shadow: 0px 0px 10px #000000;
+    position: relative;
+
+
+}
+
+.imagem-sptech{
+
+    
+    width: 380px;
+    height: 300px;
+    border-radius: 10px;
+    background-image: url('img/sptech.jpg');
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    box-shadow: 0px 0px 10px #000000;
+    position: relative;
+
+
+}
+
+.imagem-nos{
+
+    width: 380px;
+    height: 300px;
+    border-radius: 10px;
+    background-image: url('img/imagem-nos.jpg');
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    box-shadow: 0px 0px 10px #000000;
+    position: relative;
+
+
+}
 .testecor {
 
     background-color: #804817;

@@ -1,4 +1,4 @@
-var sugestaoModel = require("../models/sugestaoModel");
+var cruzadinhaModel = require("../models/cruzadinhaModel");
 
 
 function enviarPontuacao(req,res) {

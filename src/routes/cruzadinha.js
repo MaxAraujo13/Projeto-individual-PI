@@ -8,7 +8,7 @@ var cruzadinhaController = require("../controllers/cruzadinhaController");
 
 router.post("/enviarPontuacao", function (req, res) {
 
-    cruzadinhaController.enviarSugestao(req, res);
+    cruzadinhaController.enviarPontuacao(req, res);
 
 });
 
