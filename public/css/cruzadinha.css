@@ -1,0 +1,222 @@
+/* ── Herda sidebar e reset do dashboards.css ── */
+
+/* ── Área principal da cruzadinha ── */
+.cruzadinha-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ── Titulo ── */
+.cruzadinha-titulo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #052c06;
+    background-color: white;
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    margin-left: 20px;
+    box-shadow: 4px 4px 10px #081008;
+    width: fit-content;
+}
+
+/* ── Layout: grid + dicas lado a lado ── */
+.cruzadinha-corpo {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding-left: 20px;
+}
+
+/* ── Wrapper do grid com scroll ── */
+.grid-wrapper {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 4px 4px 10px #081008;
+    overflow: auto;
+    max-height: 78vh;
+}
+
+/* ── Grid de celulas ── */
+#grid_cruzadinha {
+    display: grid;
+    gap: 2px;
+}
+
+/* ── Celula sem letra (fundo escuro) ── */
+.celula-vazia {
+    width: 36px;
+    height: 36px;
+    background-color: #0d1f0d;
+    border-radius: 3px;
+}
+
+/* ── Celula com input ── */
+.celula-ativa {
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Input de cada letra ── */
+.input-letra {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    caret-color: #76c777;
+}
+
+.input-letra:focus {
+    background-color: rgba(118, 199, 119, 0.2);
+    border-radius: 4px;
+}
+
+/* ── Numero pequeno da dica no canto ── */
+.numero-dica {
+    position: absolute;
+    top: 1px;
+    left: 2px;
+    font-size: 0.45rem;
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    line-height: 1;
+}
+
+/* ── Cor ao acertar ── */
+.letra-certa {
+    color: #76c777;
+}
+
+/* ── Cor ao errar ── */
+.letra-errada {
+    color: #ff6b6b;
+}
+
+/* ── Painel lateral de dicas ── */
+.painel-dicas {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 4px 4px 10px #081008;
+    width: 320px;
+    min-width: 260px;
+    max-height: 78vh;
+    overflow-y: auto;
+}
+
+.painel-dicas h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #c8e6c9;
+    margin-bottom: 0.8rem;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.painel-dicas h3:first-child {
+    margin-top: 0;
+}
+
+/* ── Lista de dicas ── */
+#lista_horizontais,
+#lista_verticais {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* ── Item de dica clicavel ── */
+.item-dica {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+    padding: 0.4rem 0.5rem;
+    border-radius: 6px;
+    transition: background 0.15s;
+    line-height: 1.4;
+}
+
+.item-dica:hover {
+    background-color: rgba(118, 199, 119, 0.15);
+    color: #ffffff;
+}
+
+.item-dica b {
+    color: #76c777;
+}
+
+/* ── Barra de ações (verificar / limpar) ── */
+.acoes-cruzadinha {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding-left: 20px;
+    flex-wrap: wrap;
+}
+
+/* ── Botao principal ── */
+.botao-verificar {
+    padding: 0.7rem 1.8rem;
+    background-color: #4b824c;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0px 4px 5px #031804;
+    transition: background 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.botao-verificar:hover {
+    background-color: #3a6b3b;
+}
+
+/* ── Botao secundario ── */
+.botao-limpar {
+    padding: 0.7rem 1.4rem;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.botao-limpar:hover {
+    background-color: rgba(255, 80, 80, 0.1);
+    color: #ff8a80;
+}
+
+/* ── Texto de resultado ── */
+#resultado_pontuacao {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #76c777;
+}

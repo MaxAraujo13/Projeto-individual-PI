@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vozes de Luanda - Cruzadinha</title>
+
+    <link rel="stylesheet" href="../css/dashboards.css">
+    <link rel="stylesheet" href="../css/cruzadinha.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap" rel="stylesheet">
+</head>
+
+<body onload="AtualizarNome()">
+
+    <div class="janela">
+
+        <!-- sidebar igual ao dashboard -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <span class="logo-icone">🌿</span>
+                <b>Vozes de Luanda</b>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="tela-entidades.html" class="sidebar-link">Entidades</a>
+                <a href="agradecimento.html" class="sidebar-link sidebar-especial">Especial</a>
+                <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+            </nav>
+            <a href="index.html" class="sidebar-sair">Sair</a>
+        </aside>
+
+        <!-- conteudo principal substituindo graficos/kpis -->
+        <div class="cruzadinha-main">
+
+            <!-- titulo com nome do usuario -->
+            <h1 class="cruzadinha-titulo">
+                Olá, <span id="b_usuario"></span>! Complete a cruzadinha das entidades 🌿
+            </h1>
+
+            <!-- botoes de acao -->
+            <div class="acoes-cruzadinha">
+                <button class="botao-verificar" onclick="verificarRespostas()">Verificar respostas</button>
+                <button class="botao-limpar" onclick="limparCruzadinha()">Limpar tudo</button>
+                <span id="resultado_pontuacao"></span>
+            </div>
+
+            <!-- grid da cruzadinha + painel de dicas -->
+            <div class="cruzadinha-corpo">
+
+                <!-- wrapper com scroll para o grid -->
+                <div class="grid-wrapper">
+                    <div id="grid_cruzadinha"></div>
+                </div>
+
+                <!-- painel lateral com as dicas -->
+                <div class="painel-dicas">
+
+                    <h3>↔ Horizontais</h3>
+                    <ul id="lista_horizontais"></ul>
+
+                    <h3>↕ Verticais</h3>
+                    <ul id="lista_verticais"></ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+<script src="../js/palavras.js"></script>
+<script src="../js/cruzadinhaJogo.js"></script>
+
+<script>
+
+    // Verifica sessão e inicializa tudo
+    function AtualizarNome() {
+
+        let nomeUsuario = sessionStorage.NOME_USUARIO;
+
+        let idUsuario = sessionStorage.ID_USUARIO;
+
+        b_usuario.innerHTML = nomeUsuario;
+
+        if (!idUsuario || !nomeUsuario) {
+
+            alert('Usuário não encontrado, tente novamente.');
+
+            window.location = "../loginUmbanda.html";
+
+            return;
+        }
+
+        // Monta o grid e as dicas
+        iniciarCruzadinha();
+
+        renderizarDicas();
+    }
+
+    
+
+</script>
+
+</html>

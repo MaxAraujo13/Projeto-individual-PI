@@ -10,9 +10,9 @@ html {
 .body {
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/fundo.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center top;
+    background-attachment: fixed;
 }
-
 /* Banner principal com texto e imagem lado a lado */
 .banner {
     display: flex;
@@ -41,6 +41,7 @@ html {
     color: #2d6a2d;
     margin-bottom: 1rem;
     margin-left: 70px;
+   
 }
 
 .banner-texto p {

@@ -195,18 +195,6 @@
 
                 console.log('passe no if tamanho senha ')
 
-            } else if (!temNumero) {
-
-                div_validar.innerHTML = " Insira pelo menos um número ";
-
-                console.log('passe no if numero ')
-
-            } else if (!temEspecial) {
-
-                div_validar.innerHTML = " Insira pelo menos um caractere especial. Ex: '#', '!'";
-
-                console.log('passe no if especial ')
-
             } else if (senha == senha.toUpperCase()) {
 
                 div_validar.innerHTML = "Insira pelo menos uma letra minúscula"
@@ -217,11 +205,25 @@
                 div_validar.innerHTML = "Insira pelo menos uma letra maiúscula"
 
 
+            } else if (!temNumero) {
+
+                div_validar.innerHTML = " Insira pelo menos um número ";
+
+                console.log('passe no if numero ');
+
+            } else if (!temEspecial) {
+
+                div_validar.innerHTML = " Insira pelo menos um caractere especial. Ex: '#', '!'";
+
+                console.log('passe no if especial ');
+
+
             } else if (senha != senhaDnv) {
 
                 div_confirmar.innerHTML = " A senha e a senha de confirmação precisam ser iguais";
 
-                console.log('passe no if senha dnv ')
+                console.log('passe no if senha dnv ');
+
             } else {
 
                 div_validar.innerHTML = ' ';
@@ -234,7 +236,7 @@
 
             return senhaFoi;
 
-    
+
 
         }
 
@@ -258,7 +260,7 @@
 
             let erro = ""; // variavel que rcebe a mensagem de erro, caso tenha
 
-         
+
 
 
             // validações antes de cadastrar
@@ -267,11 +269,12 @@
                 erro = "Por favor, preencha todos os campos!";
 
                 console.log('passe no if');
+                
             } else if (!email) {
 
                 erro = "Por favor, verifique seus dados e tente novamente"
 
-            } else if(!senha) {
+            } else if (!senha) {
 
                 erro = "Por favor, verifique seus dados e tente novamente"
 
@@ -291,6 +294,7 @@
 
                 // Monta os dados para enviar à API
                 let corpo = {
+
                     nomeServer: nome,
                     emailServer: email,
                     senhaServer: senha,
@@ -302,23 +306,32 @@
                 fetch('/usuarios/cadastrar', {
                     method: 'POST',
                     headers: {
+                        
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(corpo)
                 })
                     .then(function (resposta) {
-                        if (resposta.status == 201) {
+
+                        if (resposta.ok) {
+
                             console.log('Cadastro realizado com sucesso');
+
                             div_box_cadastro.style.display = "flex"
+
                             setTimeout(() => location.href = "loginUmbanda.html", 1500);
 
                         } else {
-                            alert('Erro ao cadastrar. Tente novamente.');
-                            console.log('Erro no cadastro. Status: ' + resposta.status);
+
+                            alert(`Erro ao cadastrar. Tente novamente.`);
+
+                            console.log(`Erro no cadastro. Status: ${resposta.status}`);
                         }
                     })
                     .catch(function (erro) {
+
                         console.log('Erro na chamada à API: ', erro);
+
                         alert('Erro de conexão com o servidor.');
                     });
 

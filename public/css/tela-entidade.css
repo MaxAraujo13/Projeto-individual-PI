@@ -2,10 +2,11 @@
 
 /* Imagem de fundo com overlay escuro */
 .body {
-
+    
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/fundo.jpg');
-    background-size: cover;
-    background-position: center;
+    background-size: 100% auto;
+    background-position: center top;
+    background-attachment: fixed;
 }
 
 /* Banner principal com texto e imagem lado a lado */
@@ -20,10 +21,12 @@
     align-items: center;
     justify-content: center;
     height: 700px;
-    background-size: cover;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.518)), url('img/umbanda.jpg');
-
+    background-size: 100% auto;        /* largura 100%, altura proporcional */
+    background-position: center top;   /* ancora no topo, não estica */
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.518)), url('img/banner.jpg');
 }
+
 
 .banner-texto {
     
@@ -37,9 +40,10 @@
 
     font-size: 4rem;
     font-weight: 600;
-    color: #2d6a2d;
+    color: white;
     margin-bottom: 1rem;
     margin-left: 40px;
+    text-shadow: 2px 2px 2px rgba(219, 217, 217, 0.8);
 }
 
 .banner-texto h2{
@@ -48,10 +52,8 @@
 
 }
 
-
-
 .banner-texto p {
-    font-size: 1.3rem;
+    font-size: 2rem;
     line-height: 1.7;
     color: white;
     margin-bottom: 1rem;
@@ -70,8 +72,6 @@
     margin-top: 20px;
     background-color: #2d6a2dd2;
 
-
-
 }
 
 /* Área da imagem principal do banner */
@@ -88,27 +88,72 @@
 
 /* Card branco com borda para seções de conteúdo */
 .texto-bloco {
+
     margin: 2rem;
     background-color: #fffffff2;
     border: 1px solid #d4d4cc;
     border-radius: 10px;
     padding: 2rem;
     box-shadow: 0px 0px 20px #161616;
+    margin-bottom: 2rem;
+
 }
 
 .texto-bloco h2 {
+
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1rem;
 }
 
+.card-valores {
+
+    display: flex;
+    position: relative;
+    width: 220px;
+    height: 250px;
+    border: 3px solid rgba(53, 51, 51, 0.717);
+    left: 200px;
+    box-shadow: 0px 4px 5px rgb(41, 40, 40);
+    border-radius: 20px;
+    align-items: center;
+
+
+}
+
+.valores-h1 {
+
+    margin-bottom: 20px;
+
+}
+
+.card-valores h1{
+
+    margin-left: 30px;
+    color: rgb(36, 6, 84);
+
+}
+
+
+.separa-card{
+
+    display: flex;
+    align-items: center;
+    gap: 10rem;
+
+}
+
 .texto-bloco p {
-    font-size: 0.95rem;
+    font-size: 1.2rem;
     color: #222222;
     line-height: 1.8;
 }
 
-/* HOME — SEÇÃO COM IMAGEM LATERAL */
+.hero-texto{
+
+    font-size: 1rem;
+
+}
 
 /* Texto e imagem lado a lado dentro do bloco */
 .separa {
@@ -132,11 +177,11 @@
     flex-shrink: 0;
     box-shadow: 0px 0px 10px #000000;
     position: relative;
-    left: 80px;
+
 }
 
 .testecor {
 
-    background-color: rgba(255, 255, 255, 0.918);
+    background-color: #804817;
 
 }

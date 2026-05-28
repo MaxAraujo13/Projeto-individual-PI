@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greenlight - Login</title>
+    <title>Vozes de Luanda - Login</title>
     <link rel="stylesheet" href="./css/loginUmbanda.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
     <div class="main-container">
         <section class="banner-side">
             <div class="banner-content">
-                <h1> Além do véu, a sabedoria espera.</h1>
+                <h1>Além do véu, a sabedoria espera.</h1>
                 <p class="legenda-verde">Conecte-se. Os enigmas do além encontram resposta aqui.</p>
             </div>
         </section>
@@ -45,13 +45,11 @@
             </div>
         </section>
     </div>
-
 </body>
 
 </html>
+
 <script>
-
-
 
     function fLogin() {
 
@@ -59,13 +57,18 @@
         let senha = ipt_senha.value;
 
         if (email == "" || senha == "") {
+
             alert('Por favor, preencha todos os campos!');
+            
             return;
         }
 
         let corpo = {
+
             emailServer: email,
+
             senhaServer: senha
+
         };
 
         fetch('/usuarios/autenticar', {
@@ -76,20 +79,31 @@
             body: JSON.stringify(corpo)
         })
             .then(function (resposta) {
-                if (resposta.status == 200) {
-                    setTimeout(() => location.href = "tela-entidades.html", 700)
+                if (resposta.ok) {
+
+                    resposta.json().then(function (usuario) {
+
+                        sessionStorage.ID_USUARIO       = usuario.id;
+
+                        sessionStorage.NOME_USUARIO     = usuario.nome;
+
+                        sessionStorage.ENTIDADE_USUARIO = usuario.entidade;
+
+                        setTimeout(() => location.href = "tela-entidades.html", 700);
+                    });
 
                 } else {
+
                     alert('E-mail e/ou senha inválidos. Verifique seus dados e tente novamente.');
+
                 }
             })
             .catch(function (erro) {
-                console.log('Erro na chamada à API: ', erro);
+
+                console.log(`Erro na chamada à API:,  ${erro}`);
+
                 alert('Erro de conexão com o servidor.');
             });
-
     }
-
-
 
 </script>

@@ -3,26 +3,26 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- pra adaptar ao tamanho da tela -->
-    <title>Vozes de Luanda - Home</title>
-    <link rel="stylesheet" href="../css/globalUmbanda.css"> <!-- CSS global  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vozes de Luanda - Entidades</title>
+    <link rel="stylesheet" href="../css/globalUmbanda.css">
     <link rel="stylesheet" href="../css/tela-entidade.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap" rel="stylesheet">
 </head>
 
-<body class="body">
+<body id="body" class="body" onload="AtualizarNome()">
 
     <header id="head">
         <nav class="navbar">
-            <div class="logo">
+            <div id="logo" class="logo">
                 <span class="logo-icone">🌿</span>
                 <b>Vozes de Luanda</b>
             </div>
             <div class="nav-links">
-                <a href="index.html">Dashboard</a>
-                <a href="loginUmbanda.html">Sair</a>
+                <a id="dash" href="dashboard.html">Dashboard</a>
+                <a id="sair" onclick="limparSessao()" href="index.html">Sair</a>
                 <a href="agradecimento.html" class="button-entrar" id="especial">Especial</a>
             </div>
         </nav>
@@ -30,7 +30,8 @@
 
     <section class="banner" id="inicio">
         <div class="banner-texto">
-            <p><b>Bem vindo, fulano!</b></p>
+            <p><b>Bem vindo,
+                    <span id="b_usuario"></span></b></p>
             <h1 id="texto1">Entidades: Ancestralidade viva</h1>
             <h2>Qual entidade você deseja conhecer?</h2>
 
@@ -51,242 +52,783 @@
         </div>
     </section>
 
-
     <section id="section_id" class="texto-bloco">
-
         <div class="separa">
-            <div class="hero-texto texto-bloco-coonteudo">
-                <h1 id="id_h1">História da umbanda: A luta e a resistência pela ancestralidade.</h1>
-                <p id="id_p">
-
-                    Texto resumido sobre a historia da umbanda
-
+            <div class="hero-texto texto-bloco-conteudo">
+                <h1 id="id_h1" class="valores-h1"> Se aprofunde nos misterios do mundo espiritual.</h1>
+                <p id="id_p"> o Vozes de Luanda é um espaço aberto para o aprendizado. Nosso foco é auxiliar você a
+                    entender mais sobre seus guias.
+                    Selecione e comece!
                 </p>
             </div>
-
-            <div id="imagem_entidad" class="imagem-2"></div>
-
+            <div id="imagem_entidade" class="imagem-2"></div>
         </div>
     </section>
-
 
     <footer id="id_pe">
         <div class="footer-grid">
 
             <div class="footer-col">
-                <h4>Vozes de Luanda</h4>
-                <p>Um espaço de fé, respeito e aprendizado sobre a religião da Umbanda. Unidos pela luz e pela caridade.
-                </p>
-                <p class="axe">Axé a todos!</p>
+                <h4 id="h4_pe1">Vozes de Luanda</h4>
+                <p id="p_pe1">Um espaço de fé, respeito e aprendizado sobre a religião da Umbanda. Unidos pela luz e
+                    pela caridade.</p>
+                <p id="p_pe2" class="axe">Axé a todos!</p>
             </div>
 
             <div class="footer-col">
-                <h4>Contato</h4>
-                <p>📧 contato@umbandaluz.com.br</p>
-                <p>📍 São Paulo, SP — Brasil</p>
-                <p>📞 (11) 99999-0000</p>
-                <p>🕐 Seg–Sex, 9h às 18h</p>
+
+                <h4 id="h4_pe2">Contato</h4>
+                <p id="p_pe3">📧 max.silva@sptech.school</p>
+                <p id="p_pe4">📍 São Paulo, SP — Brasil</p>
+                <p id="p_pe5"></p>
+                <p id="p_pe6">Visite o Terreiro de Umbanda Caboclo Tupinambá e Flecha Dourada</p>
             </div>
 
             <div class="footer-col">
-                <h4>Links rápidos</h4>
-                <a href="index.html">Dashboard</a>
-                <a href="#inicio">Entidades</a>
-                <a href="loginUmbanda.html">Sair</a>
-                <a href="agradecimentos.html">Especial</a>
+                <h4 id="h4_pe3">Links rápidos</h4>
+                <a id="a1" href="dashboard.html">Dashboard</a>
+                <a id="a2" href="tela-entidades.html">Entidades</a>
+                <a id="a3" href="loginUmbanda.html">Sair</a>
+                <a id="a4" href="agradecimentos.html">Especial</a>
             </div>
 
             <div class="footer-col">
-                <h4>Envie uma sugestão</h4>
-                <div class="sugestao-form">
-                    <input type="text" id="sug-nome" placeholder="Seu nome">
-                    <textarea id="sug-msg" placeholder="Escreva sua sugestão..."></textarea>
+                <h4 id="h4_pe4">Envie uma sugestão</h4>
+                <div id='sugestao' class="sugestao-form">
+                    <input type="text" id="sug_nome" placeholder="Seu nome">
+                    <textarea id="sug_msg" placeholder="Escreva sua sugestão..."></textarea>
                     <button class="botao-sug" id="bt_sugestao" onclick="enviarSugestao()">Enviar sugestão</button>
-                    <p id="sug-confirmacao" class="sug-confirmacao">✓ Sugestão enviada! Obrigado.</p>
-                    <!-- Só mostra depois de enviar-->
+                    <p id="p_pe7" class="sug-confirmacao" style="display:none">✓ Sugestão enviada! Obrigado.</p>
                 </div>
             </div>
 
         </div>
 
-        <hr class="footer-linha"> <!-- Linha pra ficar mais bonitinho -->
-        <p class="footer-rodape" id="rodape"> 2026 Vozes de Luanda — Feito com amor por um aluno Sptech</p>
+        <hr class="footer-linha">
+        <p class="footer-rodape" id="rodape">2026 Vozes de Luanda — Feito com amor por um aluno Sptech</p>
     </footer>
 
     <script>
 
+        // função de que pega o nome do usuario do banco
 
-        function fEntidade() { // função pra mudar as informações de acordo com o select
+        function AtualizarNome() {
 
-            let entidades = [{
+            b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-                nome: 'preto velho',
+            let nome = sessionStorage.NOME_USUARIO;
 
-                navbar: head.style.backgroundColor = 'black',
+            b_usuario.innerHTML = nome;
 
-                borda_navbar: head.style.borderBottom = '6px solid rgba(255, 255, 255, 0.772);',
+            let idUsuario = sessionStorage.ID_USUARIO;
 
-                footer: id_pe.style.backgroundColor = '#660000',
+            if (!idUsuario || !nome) {
 
-                texto1: texto1.style.color = '#660000',
+                alert('Usuário não encontrado, tente novamente.');
 
-                section: section_id.style.backgroundColor = 'black',
+                window.location = "../loginUmbanda.html"
 
-                titulo: id_h1.style.color = 'white',
+                console.log("Usuário não está logado.");
 
-                paragrafo: id_p.style.color = 'white',
-
-                especial: especial.style.color = 'black',
-
-                botaoSug: bt_sugestao.style.backgroundColor = 'black',
-
-                rodape: rodape.style.color = 'black',
-            },
-
-            {
-
-                nome: 'Exu',
-
-                navbar: head.style.backgroundColor = 'black',
-
-                footer: id_pe.style.backgroundColor = '#660000',
-
-                texto1: texto1.style.color = '#660000',
-
-                borda_navbar: head.style.borderBottom = '#4a0101',
-
-                section: section_id.style.backgroundColor = 'black',
-
-                titulo: id_h1.style.color = 'white',
-
-                paragrafo: id_p.style.color = 'white',
-
-                especial: especial.style.color = 'black',
-
-                botaoSug: bt_sugestao.style.backgroundColor = 'black',
-
-                rodape: rodape.style.color = 'black',
-
-
-            },
-
-            {
-                nome: 'Exu',
-
-                navbar: head.style.backgroundColor = '#660000',
-
-                footer: id_pe.style.backgroundColor = '#9A0000',
-
-                texto1: texto1.style.color = '#9A0000',
-
-                section: section_id.style.backgroundColor = 'black',
-
-                titulo: id_h1.style.color = 'white',
-
-                paragrafo: id_p.style.color = 'white',
-
-                especial: especial.style.color = 'black',
-
-                botaoSug: bt_sugestao.style.backgroundColor = 'black',
-
-                rodape: rodape.style.color = 'black',
-            }]
-
-
-
-            let entidade = select_entidade.value;
-
-            if (entidade == 0) {
-
-                head.style.backgroundColor = 'white';
-
-                id_pe.style.backgroundColor = 'black'
-
-
-            } else if (entidade == 1) {
-
-
-                head.style.backgroundColor = '#2d6a2d'
-
-                id_pe.style.backgroundColor = '#2d6a2d'
-
-                id_h1.innerHTML = "caboclo";
-                id_p.innerHTML = "Caboclo";
-
-            } else if (entidade == 2) {
-
-                head.style.backgroundColor = '#3a1d06';
-
-            } else if (entidade == 3) {
-
-                head.style.backgroundColor = '#f609af';
-
-                id_pe.style.backgroundColor = '#37e7e7'
-
-
-            } else if (entidade == 4) {
-
-                head.style.backgroundColor = '#067ac3';
-
-            } else if (entidade == 5) {
-
-                head.style.backgroundColor = '#ec8909';
-
-            } else if (entidade == 6) {
-
-                head.style.backgroundColor = '#e6d517';
-
-            } else if (entidade == 7) {
-
-                head.style.backgroundColor = 'black';
-
-                id_pe.style.backgroundColor = 'rgba(255, 255, 255, 0.961)';
-
-                texto1.style.color = '#660000';
-
-                section_id.style.backgroundColor = ' rgba(255, 255, 255, 0.918)'
-
-                id_h1.style.color = 'black';
-
-                id_p.style.color = 'black';
-
-                especial.style.color = 'black';
-
-                bt_sugestao.style.backgroundColor = 'black';
-
-                rodape.style.color = 'black';
-
-                id_pe.style.borderTop = '10px solid  rgba(0, 0, 0, 0.911)';
-
-                head.style.borderBottom = '8px solid rgba(255, 255, 255, 0.68)';
-
-
-            } else if (entidade == 8) {
-
-                head.style.backgroundColor = '#9A0000';
-
-                id_pe.style.backgroundColor = 'black';
-
-
-            } else if (entidade == 9) {
-
-                head.style.backgroundColor = 'White'
-
-                id_pe.style.backgroundColor = '#9A0000';
-
-
+                return;
 
             }
 
+        }
+        // entidades: Cada objeto representa uma entidade e guarda os VALORES de cor
+        // para cada ID da página. As cores só são aplicadas quando o usuário
+        // seleciona uma entidade no <select> — nunca na criação do array
+        let entidades = [
+
+            // ── índice 0: Preto Velho ────────────────────────────────────────
+            {
+                nome: "Preto Velho",
+
+                // Estrutura
+                body_bg: `url('css/img/pretovelhoFundo.jpg')`,
+                head_bg: "black", // navbar
+                logo_bg: "white", // logo
+                head_border: "6px solid #757575",
+                id_pe_bg: "#9e9e9e",          // footer
+                section_id_bg: "#f5f5f5",
+                inicio_bg_imagem: ` linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('css/img/pretovelhoFundo.jpg')`,        // seção de conteúdo
+
+                // Textos do banner
+                texto1_color: "white",
+                select_bg: "#757575",
+                select_border: "#757575",
+                imagem: `url('css/img/pretovelho.jpg')`,
+
+                // Textos da seção
+                id_h1_color: "black",
+                id_p_color: "black",
+                texto_h1: "Pretos velhos: Precursores do hoje",
+                texto_p: ` Ancestrais africanos escravizados que, 
+                mesmo diante do sofrimento, escolheram a cura e a sabedoria. 
+                São guias pacientes, humildes e acolhedores, conhecidos pela força espiritual e 
+                pelo dom de aconselhar com amor e simplicidade. Quando foram trazidos ao Brasil, pelos portugueses,
+                foram forçados a adorar seus santos e, por isso, precisaram encontrar maneiras de resistir e passar seus fundamentos adiante. 
+                Esculpiam estátuas de seus orixás em barro e enterravam, colocando os santos católicos que mais se assemelhassem em cima.
+                Quando seus senhores os viam rezar, não desconfiavam que eles estavam chamando por seus orixás e, assim, a crença e a força
+                dos orixás resistiu. Hoje, esses espirítos voltam para nos ensinar a humildade, o perdão e a resistência. Para
+                nunca deixarmos que nos digam que somos menos, ou deixar que nos pisem, são símbolos de fé, respeito e força.`,
 
 
+                // Footer títulos
+                h4_pe1_color: "black",
+                h4_pe2_color: "black",
+                h4_pe3_color: "black",
+                h4_pe4_color: "black",
 
+                // Footer textos
+                p_pe1_color: "black",
+                p_pe2_color: "black",
+                p_pe3_color: "black",
+                p_pe4_color: "black",
+                p_pe5_color: "black",
+                p_pe6_color: "black",
+                p_pe7_color: "black",
+                rodape_color: "black",
+
+                // Links do footer
+                a1_color: "black",
+                a2_color: "black",
+                a3_color: "black",
+                a4_color: "black",
+
+                // Formulário de sugestão
+                sug_nome_bg: "##757575",
+                sug_msg_bg: "##757575",
+                bt_sug_bg: "#757575",
+                bt_sug_color: "#ffffff",
+
+                // Navbar especial
+                especial_bg: "#757575",
+                especial_color: "#ffffff"
+            },
+
+            // ── índice 1: Caboclo ────────────────────────────────────────────
+            {
+                nome: "Caboclo",
+                body_bg: `url('css/img/cabocloFundo.jpg')`,
+                logo_bg: "white",
+                head_bg: "#1b5e20",
+                head_border: "6px solid #4caf50",
+                inicio_bg_imagem: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('css/img/caboclo.jpg')`,
+                imagem: `url('css/img/cabolco2.jpg')`,
+                id_pe_bg: "#1b5e20",
+                inicio_bg: "#2e7d32",
+                section_id_bg: "#f1f8e9",
+                texto1_color: "#1b5e20",
+                texto_h1: "Caboclos: Verdadeiros dono das nossas terras",
+                texto_p: `Espíritos de indígenas brasileiros e mestres da natureza. Bravos, diretos e protetores, os caboclos trazem a força da mata, a cura pelas ervas 
+                e a conexão profunda com a terra. São guerreiros da luz que defendem seus filhos com determinação. São os originários, aqueles que devemos chamar
+                de verdadeiros donos das terras brasileiras. Participaram da formação da umbanda, compartilhando seus conhecimentos sobre as ervas e a natureza, pelos pajés.
+                São espirítos que nos ensinam sobre força e a coragem para desbravar matas desconhecidas, o foco na hora da caça e a valorização da natureza como nossa grande mãe e cuidadora.`,
+                select_bg: "#1b5e20",
+                select_border: "#4caf50",
+                id_h1_color: "black",
+                id_p_color: "black",
+                h4_pe1_color: "#c8e6c9",
+                h4_pe2_color: "#c8e6c9",
+                h4_pe3_color: "#c8e6c9",
+                h4_pe4_color: "#c8e6c9",
+                p_pe1_color: "#a5d6a7",
+                p_pe2_color: "#81c784",
+                p_pe3_color: "#a5d6a7",
+                p_pe4_color: "#a5d6a7",
+                p_pe5_color: "#a5d6a7",
+                p_pe6_color: "#a5d6a7",
+                p_pe7_color: "#ffffff",
+                rodape_color: "#a5d6a7",
+                a1_color: "#c8e6c9",
+                a2_color: "#c8e6c9",
+                a3_color: "#c8e6c9",
+                a4_color: "#c8e6c9",
+                sug_nome_bg: "#13650eb3",
+                sug_msg_bg: "#13650eb3",
+                bt_sug_bg: "#388e3c",
+                bt_sug_color: "#ffffff",
+                especial_bg: "#388e3c",
+                especial_color: "#ffffff"
+            },
+
+            // ── índice 2: Boiadeiro ──────────────────────────────────────────
+            {
+                nome: "Boiadeiro",
+                body_bg: `url('css/img/boiadeiroFundo.jpg')`,
+                logo_bg: "white",
+                head_bg: "#654321",
+                head_border: "6px solid #a0522d",
+                inicio_bg_imagem: ` linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('css/img/boiadeiroBanner.jpg')`,
+                imagem: `url('css/img/boiadeiro.jpg')`,
+                id_pe_bg: "#654321",
+                inicio_bg: "#795548",
+                section_id_bg: "#fbe9e7",
+                texto1_color: "#654321",
+                select_bg: "#654321",
+                select_border: "#a0522d",
+                id_h1_color: "black",
+                texto_h1: "Boiadeiros: Força bruta e pilar do sertão",
+                texto_p: `Mestres do sertão e da lida no campo, os boiadeiros carregam a energia livre e destemida do
+                vaqueiro nordestino. Simples e trabalhadores, 
+                são guias que ensinam sobre resistência, coragem e o valor da vida simples. Nos ensinam como ter a coragem e a resiliência nos tempo de seca, 
+                a ter paciência e brio para domar aquilo que não conseguimos dentro de nós. Suas histórias carregam o sofrimento da falta, da pobreza e da vida difícil no sertão,
+                nos lembrando que sempre devemos ser fortes, pacientes, corajosos e felizes com aquilo que temos. Devido a essa realidade dura, são guias brutos e bravos, 
+                mas tratam seus filhos com muito amor e respeito, desde que ele ande nos caminhos corretos.`,
+                id_p_color: "black",
+                h4_pe1_color: "#ffccbc",
+                h4_pe2_color: "#ffccbc",
+                h4_pe3_color: "#ffccbc",
+                h4_pe4_color: "#ffccbc",
+                p_pe1_color: "#ffab91",
+                p_pe2_color: "#ff8a65",
+                p_pe3_color: "#ffab91",
+                p_pe4_color: "#ffab91",
+                p_pe5_color: "#ffab91",
+                p_pe6_color: "#ffab91",
+                p_pe7_color: "#ffffff",
+                rodape_color: "#ffab91",
+                a1_color: "#ffccbc",
+                a2_color: "#ffccbc",
+                a3_color: "#ffccbc",
+                a4_color: "#ffccbc",
+                sug_nome_bg: "#654728b2",
+                sug_msg_bg: "#654728b2",
+                bt_sug_bg: "#5d4037",
+                bt_sug_color: "#ffffff",
+                especial_bg: "#5d4037",
+                especial_color: "#ffffff"
+            },
+
+            // ── índice 3: Erê ────────────────────────────────────────────────
+            {
+                nome: "Erê",
+                body_bg: `url('css/img/doces.jpg')`,
+                logo_bg: "white",
+                head_bg: "#c21932",
+                head_border: "6px solid #6e0f1d",
+                inicio_bg_imagem: ` linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('css/img/crianças.jpg')`,
+                id_pe_bg: "#10166b",
+                inicio_bg: "#fce4ec",
+                imagem: `url('css/img/ere.jpg')`,
+                section_id_bg: "#fff0f5",
+                texto1_color: "#c2185b",
+                select_bg: "#4d58f6c8",
+                select_border: "#f48fb1",
+                texto_h1: "Erês: Sutileza da infância",
+                texto_p: `Espíritos infantis cheios de alegria, pureza e espontaneidade.
+                 Os erês trazem leveza e brincadeira aos terreiros, 
+                 mas escondem por trás da inocência uma sabedoria profunda. 
+                 Representam a criança interior e a renovação da alma. Ensinam a levar a vida de forma leve e fluída. Com seus doces e seu refrigerante,
+                 levam embora qualquer angustia e amargura. Demonstram que, muitas vezes, um olhar simples e alegre pode curar feridas que nunca cicatrizam.
+                 Fazem seu trabalho brincando e rindo, adoram brinquedos e todo tipo de doce, são amorosos e protegem seus filhos das adversidades da vida.
+                `,
+
+                id_h1_color: "black",
+                id_p_color: "black",
+                h4_pe1_color: "white",
+                h4_pe2_color: "white",
+                h4_pe3_color: "white",
+                h4_pe4_color: "white",
+                p_pe1_color: "white",
+                p_pe2_color: "white",
+                p_pe3_color: "white",
+                p_pe4_color: "white",
+                p_pe5_color: "white",
+                p_pe6_color: "white",
+                p_pe7_color: "white",
+                rodape_color: "#ad1457",
+                a1_color: "white",
+                a2_color: "white",
+                a3_color: "white",
+                a4_color: "white",
+                sug_nome_bg: "#3840acbe",
+                sug_msg_bg: "#3840acbe",
+                bt_sug_bg: "#c2185b",
+                bt_sug_color: "#ffffff",
+                especial_bg: "#c2185b",
+                especial_color: "#ffffff"
+            },
+
+            // ── índice 4: Marinheiro ─────────────────────────────────────────
+            {
+                nome: "Marinheiro",
+                body_bg: `url('css/img/mar.jpg')`,
+                logo_bg: "white",
+                head_bg: "#2d37cbf1",
+                head_border: "6px solid #0f1893d0",
+                inicio_bg_imagem: ` linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('css/img/marinheiroBanner.jpg')`,
+                imagem: `url('css/img/marinheiro.jpg')`,
+                id_pe_bg: "#0f1893f2",
+                inicio_bg: "#1976d2",
+                section_id_bg: "#e3f2fd",
+                texto1_color: "#1565c0",
+                select_bg: "#64b5f6",
+                select_border: "#1565c0",
+                texto_h1: "Marinheiros: Sabedoria que atravessa os sete mares",
+                texto_p: `Espíritos dos mares e das águas, os marinheiros são desbravadores, 
+                livres e aventureiros. Trabalham com a energia dos oceanos e das travessias, 
+                ajudando nos desafios da vida com bom humor, coragem e desprendimento. Nos mostram que podemos suportar mares altos e turbulentos,
+                 que mesmo quando a pesca estiver fraca, podemos levar a vida com tranquilidade. Cuidam da mente e dos sentimentos daqueles que protegem.
+                 Nos ensinam que, em mar calmo, não se faz bom marinheiro.`,
+
+                id_h1_color: "black",
+                id_p_color: "black",
+                h4_pe1_color: "#bbdefb",
+                h4_pe2_color: "#bbdefb",
+                h4_pe3_color: "#bbdefb",
+                h4_pe4_color: "#bbdefb",
+                p_pe1_color: "#90caf9",
+                p_pe2_color: "#64b5f6",
+                p_pe3_color: "#90caf9",
+                p_pe4_color: "#90caf9",
+                p_pe5_color: "#90caf9",
+                p_pe6_color: "#90caf9",
+                p_pe7_color: "#ffffff",
+                rodape_color: "#90caf9",
+                a1_color: "#bbdefb",
+                a2_color: "#bbdefb",
+                a3_color: "#bbdefb",
+                a4_color: "#bbdefb",
+                sug_nome_bg: "#424bbcc1",
+                sug_msg_bg: "#424bbcc1",
+                bt_sug_bg: "#1565c0",
+                bt_sug_color: "#ffffff",
+                especial_bg: "#1565c0",
+                especial_color: "#ffffff"
+            },
+
+            // ── índice 5: Baiano ─────────────────────────────────────────────
+            {
+                nome: "Baiano",
+                body_bg: `url('css/img/baianoFundo.jpg')`,
+                logo_bg: "white",
+                head_bg: "#f57f17",
+                head_border: "6px solid #9b500f",
+                inicio_bg_imagem: ` linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('css/img/baiano.jpg')`,
+                imagem: `url('css/img/baiana.jpg')`,
+                id_pe_bg: "#f9a825",
+                inicio_bg: "#ffee58",
+                section_id_bg: "#fffde7",
+                texto1_color: "#f57f17",
+                texto_h1: "Baianos: Resistência por aquilo que criamos",
+                texto_p: `A Linha dos Baianos surgiu para homenagear os antigos Pais e Mães de Santo da Bahia,
+                 que foram pioneiros na preservação e divulgação do culto aos Orixás no Brasil, enfrentando preconceitos e dificuldades sociais .Sua presença começou a se destacar nos terreiros a partir das décadas de 1940 a 1960, período marcado pela migração nordestina para grandes centros urbanos,
+                 quando os migrantes precisavam de acolhimento espiritual e social .
+                  Os Baianos incorporam a cultura, fé e resistência do povo nordestino, trazendo consigo
+                   o axé das práticas culturais baianas, como o candomblé, o samba e festas populares. Nos ensinam sobre trabalho duro,
+                novas formas de ver a vida e como podemos sempre dar nosso melhor todos os dias. Mostram que alegria e dureza podem se equilibrar
+                e que a vida é a melhor coisa a ser sentida`,
+
+                select_bg: "#ffd600",
+                select_border: "#f57f17",
+                id_h1_color: "black",
+                id_p_color: "black",
+                h4_pe1_color: "#212121",
+                h4_pe2_color: "#212121",
+                h4_pe3_color: "#212121",
+                h4_pe4_color: "#212121",
+                p_pe1_color: "#333333",
+                p_pe2_color: "#212121",
+                p_pe3_color: "#333333",
+                p_pe4_color: "#333333",
+                p_pe5_color: "#333333",
+                p_pe6_color: "#333333",
+                p_pe7_color: "#212121",
+                rodape_color: "#333333",
+                a1_color: "#212121",
+                a2_color: "#212121",
+                a3_color: "#212121",
+                a4_color: "#212121",
+                sug_nome_bg: "#db9930b6",
+                sug_msg_bg: "#db9930b6",
+                bt_sug_bg: "#f57f17",
+                bt_sug_color: "#ffffff",
+                especial_bg: "#f57f17",
+                especial_color: "#ffffff"
+            },
+
+            // ── índice 6: Povo Cigano ────────────────────────────────────────
+            {
+                nome: "Povo Cigano",
+                body_bg: `url('css/img/ciganoFundo.jpg')`,
+                logo_bg: "white",
+                head_bg: "#800080",
+                head_border: "6px solid #ce93d8",
+                inicio_bg_imagem: ` linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('css/img/ciganiBanner.jpg')`,
+                imagem: `url('css/img/cigano.jpg')`,
+                id_pe_bg: "#6a0080",
+                inicio_bg: "#9c27b0",
+                section_id_bg: "#f3e5f5",
+                texto1_color: "#6a0080",
+                texto_h1: "Ciganos: Amor que atravessa continentes",
+                texto_p: `Mestres da intuição, da arte e da liberdade, 
+                os ciganos chegam aos terreiros trazendo alegria, dança e sabedoria milenar. 
+                São guias do amor, da fortuna e dos caminhos,
+                 conhecidos pela generosidade e pela leitura dos destinos. Viajaram milhares de quilômetros pelo mundo, sempre mudando 
+                 e se adaptando aos novos lugares. São mestres nas magias de amor e prosperidade, ensinam que sempre devemos olhar as mudanças como
+                 oportunidades de crescimento e que, mudar é melhor do que morrer parado. Lutaram e resistiram de muita repressão durante suas viagens, ensinando
+                 que se um lugar não nos cabe, devemos procurar um que nos acomode confortavelmente. `,
+
+                select_bg: "#800080",
+                select_border: "#ce93d8",
+                id_h1_color: "black",
+                id_p_color: "black",
+                h4_pe1_color: "#e1bee7",
+                h4_pe2_color: "#e1bee7",
+                h4_pe3_color: "#e1bee7",
+                h4_pe4_color: "#e1bee7",
+                p_pe1_color: "#ce93d8",
+                p_pe2_color: "#ba68c8",
+                p_pe3_color: "#ce93d8",
+                p_pe4_color: "#ce93d8",
+                p_pe5_color: "#ce93d8",
+                p_pe6_color: "#ce93d8",
+                p_pe7_color: "#ffffff",
+                rodape_color: "#ce93d8",
+                a1_color: "#e1bee7",
+                a2_color: "#e1bee7",
+                a3_color: "#e1bee7",
+                a4_color: "#e1bee7",
+                sug_nome_bg: "#992099bf",
+                sug_msg_bg: "#992099bf",
+                bt_sug_bg: "#6a1b9a",
+                bt_sug_color: "#ffffff",
+                especial_bg: "#6a1b9a",
+                especial_color: "#ffffff"
+            },
+
+            // ── índice 7: Exu ────────────────────────────────────────────────
+            {
+                nome: "Exu",
+                body_bg: `url('css/img/cemiterio.jpg')`,
+                logo_bg: "#f90202bf",
+                head_bg: "#000000",
+                head_border: "6px solid #b71c1c",
+                inicio_bg_imagem: ` linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('css/img/exu.jpg')`,
+                imagem: `url('css/img/exu2.jpg')`,
+                id_pe_bg: "#111111",
+                inicio_bg: "#1a1a1a",
+                texto_h1: "Exu: Guardião dos portões entre a vida e o pós-vida",
+                texto_p: `Guardião das encruzilhadas e mensageiro entre os mundos, 
+                Exu é o senhor das passagens e da comunicação. Mal compreendido por muitos,
+                 é um guardião justo e poderoso que abre e fecha caminhos, sempre a serviço da ordem e da justiça. Senhor dos caminhos,
+                 da passagem dos espirítos que já se foram. Protegem seus médiuns de energias e espíritos ruins, abrem ou fecham seus caminhos.
+                 Ensinam sobre como nossas ações, boas ou ruins, podem mudar nosso destino, sobre humildade e resistência.
+                 São guias sérios e atarefados, alguns mais quietos e outros nem tanto. Usam cachaça e fumo para limpar seus médiuns,
+                 purificar e fazer suas <i> "mandingas" </i>`,
+
+                section_id_bg: "#f5f5f5",
+                texto1_color: "#b71c1c",
+                select_bg: "#1a1a1a",
+                select_border: "#b71c1c",
+                id_h1_color: "#1a1a1a",
+                id_p_color: "#333333",
+                h4_pe1_color: "#ef9a9a",
+                h4_pe2_color: "#ef9a9a",
+                h4_pe3_color: "#ef9a9a",
+                h4_pe4_color: "#ef9a9a",
+                p_pe1_color: "#bdbdbd",
+                p_pe2_color: "#e0e0e0",
+                p_pe3_color: "#bdbdbd",
+                p_pe4_color: "#bdbdbd",
+                p_pe5_color: "#bdbdbd",
+                p_pe6_color: "#bdbdbd",
+                p_pe7_color: "#ffffff",
+                rodape_color: "#9e9e9e",
+                a1_color: "#ef9a9a",
+                a2_color: "#ef9a9a",
+                a3_color: "#ef9a9a",
+                a4_color: "#ef9a9a",
+                sug_nome_bg: "#2a2a2a",
+                sug_msg_bg: "#2a2a2a",
+                bt_sug_bg: "#b71c1c",
+                bt_sug_color: "#ffffff",
+                especial_bg: "#b71c1c",
+                especial_color: "#ffffff"
+            },
+
+            // ── índice 8: Pombagira ──────────────────────────────────────────
+            {
+                nome: "Pombagira",
+                body_bg: `url('css/img/cemiterio2.jpg')`,
+                logo_bg: "white",
+                head_bg: "#8b0000",
+                texto_h1: "Pombagira: A força e a autoridade de uma mulher",
+                texto_p: ` Rainha das encruzilhadas, dona da noite, do amor e da morte. 
+                A Pombagira é uma força feminina poderosa, ligada à sensualidade, à liberdade e à verdade. 
+                Trabalha com o coração humano, desvendando mentiras e protegendo as mulheres.
+                Ensinam como a força de uma mulher pode acabar com reinos, cidades e vidas, que não devemos nos rebaixar e jamais deixar que 
+                nos pisem. Mostram como a confiança de uma mulher é perigosa e temida. Assim como os exus, trabalham na linha entre a vida e morte
+                guiando aqueles que já se foram e ensinam aqueles que ainda estão aqui, como a confiança pode ser uma arma perigosa.`,
+
+                head_border: "6px solid #ff1744",
+                inicio_bg_imagem: ` linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('css/img/pombagira.jpg')`,
+                imagem: `url('css/img/pombagira2.jpg')`,
+                id_pe_bg: "#000000",
+                inicio_bg: "#7f0000",
+                section_id_bg: "#fff5f5",
+                texto1_color: "#8b0000",
+                select_bg: "#8b0000",
+                select_border: "#ff1744",
+                id_h1_color: "black",
+                id_p_color: "black",
+                h4_pe1_color: "#ef9a9a",
+                h4_pe2_color: "#ef9a9a",
+                h4_pe3_color: "#ef9a9a",
+                h4_pe4_color: "#ef9a9a",
+                p_pe1_color: "#bdbdbd",
+                p_pe2_color: "#e0e0e0",
+                p_pe3_color: "#bdbdbd",
+                p_pe4_color: "#bdbdbd",
+                p_pe5_color: "#bdbdbd",
+                p_pe6_color: "#bdbdbd",
+                p_pe7_color: "#ffffff",
+                rodape_color: "#9e9e9e",
+                a1_color: "#ef9a9a",
+                a2_color: "#ef9a9a",
+                a3_color: "#ef9a9a",
+                a4_color: "#ef9a9a",
+                sug_nome_bg: "#1a1a1a",
+                sug_msg_bg: "#1a1a1a",
+                bt_sug_bg: "#8b0000",
+                bt_sug_color: "#ffffff",
+                especial_bg: "#8b0000",
+                especial_color: "#ffffff"
+            },
+
+            // ── índice 9: Malandros ──────────────────────────────────────────
+            {
+                nome: "Malandros",
+                body_bg: `url('css/img/lapa.jpg')`,
+                head_bg: "#b71c1c",
+                logo_bg: "white",
+                head_border: "6px solid #b40404f6",
+                inicio_bg_imagem: ` linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('css/img/malandro.jpg')`,
+                imagem: `url('css/img/malandro2.jpg')`,
+                id_pe_bg: "white",
+                inicio_bg: "#ef5350",
+                section_id_bg: "#fff5f5",
+                texto_h1: "Malandros: A arte de entender aquilo que ninguém consegue ver",
+                texto_p: `Espíritos boêmios das ruas, do samba e da malandragem carioca.
+                 Espertos, irreverentes e cheios de charme, os malandros conhecem
+                  os labirintos da vida urbana e ensinam sobre esperteza, jogo de cintura e superação sem perder a alegria.
+                  Lutaram fortemente contra a repressão da ditadura e o preconceito contra as rodas de samba e capoeira.
+                  Experts em jogar carteado, exímios e encantadores sambistas. Ensinam a honestidade e como viver a vida na malandragem.
+                  Guardando aquilo que é importante, se esgueirando, fazendo as coisas de forma sutil e devagar, sem deixar que qualquer um lhe passe
+                  a perna.`,
+
+
+                texto1_color: "#b71c1c",
+                select_bg: "#e53935",
+                select_border: "#b40404f6",
+                id_h1_color: "black",
+                id_p_color: "black",
+                h4_pe1_color: " #aa0505",
+                h4_pe2_color: " #aa0505",
+                h4_pe3_color: " #aa0505",
+                h4_pe4_color: " #aa0505",
+                p_pe1_color: " #aa0505",
+                p_pe2_color: " #aa0505",
+                p_pe3_color: " #aa0505",
+                p_pe4_color: " #aa0505",
+                p_pe5_color: " #aa0505",
+                p_pe6_color: " #aa0505",
+                p_pe7_color: " #aa0505",
+                rodape_color: "#ef9a9a",
+                a1_color: " #aa0505",
+                a2_color: " #aa0505",
+                a3_color: " #aa0505",
+                a4_color: " #aa0505",
+                sug_nome_bg: "#b82929b0",
+                sug_msg_bg: "#b82929b0",
+                bt_sug_bg: "#c62828",
+                bt_sug_color: "#ffffff",
+                especial_bg: "#c62828",
+                especial_color: "#ffffff"
+            }
+        ];
+
+        // Lê o objeto da entidade pelo índice e aplica cada valor de cor
+        // diretamente no style do elemento correspondente por id
+        function aplicarCores(indice) {
+
+            let indiceEntidade = entidades[indice];
+
+            // Estrutura
+            body.style.backgroundImage = indiceEntidade.body_bg;
+            head.style.backgroundColor = indiceEntidade.head_bg;
+            head.style.borderBottom = indiceEntidade.head_border;
+            id_pe.style.backgroundColor = indiceEntidade.id_pe_bg;
+            section_id.style.backgroundColor = indiceEntidade.section_id_bg;
+            logo.style.color = indiceEntidade.logo_bg;
+            inicio.style.backgroundImage = indiceEntidade.inicio_bg_imagem;
+            id_h1.innerHTML = indiceEntidade.texto_h1;
+            id_p.innerHTML = indiceEntidade.texto_p
+
+            // Banner
+            texto1.style.color = indiceEntidade.texto1_color;
+            select_entidade.style.backgroundColor = indiceEntidade.select_bg;
+            select_entidade.style.borderColor = indiceEntidade.select_border;
+            imagem_entidade.style.backgroundImage = indiceEntidade.imagem;
+
+            // Seção de conteúdo
+            id_h1.style.color = indiceEntidade.id_h1_color;
+            id_p.style.color = indiceEntidade.id_p_color;
+
+            // Footer — títulos das colunas
+            h4_pe1.style.color = indiceEntidade.h4_pe1_color;
+            h4_pe2.style.color = indiceEntidade.h4_pe2_color;
+            h4_pe3.style.color = indiceEntidade.h4_pe3_color;
+            h4_pe4.style.color = indiceEntidade.h4_pe4_color;
+
+            // Footer — textos
+            p_pe1.style.color = indiceEntidade.p_pe1_color;
+            p_pe2.style.color = indiceEntidade.p_pe2_color;
+            p_pe3.style.color = indiceEntidade.p_pe3_color;
+            p_pe4.style.color = indiceEntidade.p_pe4_color;
+            p_pe5.style.color = indiceEntidade.p_pe5_color;
+            p_pe6.style.color = indiceEntidade.p_pe6_color;
+            p_pe7.style.color = indiceEntidade.p_pe7_color;
+            rodape.style.color = indiceEntidade.rodape_color;
+
+            // Footer — links
+            a1.style.color = indiceEntidade.a1_color;
+            a2.style.color = indiceEntidade.a2_color;
+            a3.style.color = indiceEntidade.a3_color;
+            a4.style.color = indiceEntidade.a4_color;
+
+            // Formulário de sugestão
+            sug_nome.style.backgroundColor = indiceEntidade.sug_nome_bg;
+            sug_msg.style.backgroundColor = indiceEntidade.sug_msg_bg;
+            bt_sugestao.style.backgroundColor = indiceEntidade.bt_sug_bg;
+            bt_sugestao.style.color = indiceEntidade.bt_sug_color;
+
+            // Botão especial na navbar
+            especial.style.backgroundColor = indiceEntidade.especial_bg;
+            especial.style.color = indiceEntidade.especial_color;
+        }
+
+        function fEntidade() {
+
+            let indice = Number(select_entidade.value);
+
+            let nomeEntidade = entidades[indice].nome;
+
+            // Aplica todas as cores da entidade selecionada
+            aplicarCores(indice);
+
+            let idUsuario = sessionStorage.ID_USUARIO;
+
+            if (!idUsuario) {
+
+                console.log("Usuário não está logado. Acesso não será registrado.");
+                
+                return;
+            }
+
+            // Registra o acesso no banco para alimentar o gráfico do dashboard
+            fetch("/dashboard/registrar-acesso/" + idUsuario, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body:
+
+                    JSON.stringify({ nomeEntidade: nomeEntidade })
+            })
+                .then(function (resposta) {
+
+                    if (resposta.ok) {
+
+                        console.log(`Acesso à entidade \ ${nomeEntidade} \vregistrado com sucesso.`);
+
+                    } else {
+
+                        throw (`Houve um erro no código ${resposta.status}`)
+                    }
+                })
+                .catch(function (erro) {
+
+                    console.error(`Erro ao registrar acesso:, ${erro.message}`);
+                });
+        }
+
+
+        function enviarSugestao() {
+
+            let nome = sug_nome.value;
+
+            let msg = sug_msg.value;
+
+            let idUsuario = sessionStorage.ID_USUARIO;
+
+
+            if (nome === "" || msg === "") {
+
+                alert("Por favor, preencha seu nome e sua sugestão antes de enviar.");
+
+                return;
+
+            }
+
+            let corpo = {
+
+                nomeServer: nome,
+                mensagemServer: msg,
+                idUsuarioServer: idUsuario
+
+            }
+
+            fetch("/sugestao/enviarSugestao", {
+                method: 'POST',
+                headers: {
+
+                    'Content-Type': 'application/json'
+
+                },
+                body: JSON.stringify(corpo)
+
+
+            }).then(function (resposta) {
+
+                    if (resposta.ok) {
+
+                        console.log('Sugestão enviada para o banco');
+
+
+                        // Exibe a mensagem de confirmação e limpa os campos
+                        p_pe7.style.display = "block";
+
+                        sug_nome.value = "";
+
+                        sug_msg.value = "";
+
+                        // Oculta a confirmação após 4 segundos
+                        setTimeout(function () {
+
+                            p_pe7.style.display = "none";
+
+                        }, 4000);
+
+                    } else {
+
+                        p_pe7.style.display = "block";
+
+                        p_pe7.innerHTML = " Houve erro ao enviar. Tente novamente."
+
+                    }
+
+                })
 
         }
 
-        function enviarSugestao() { /* Executada ao clicar no botão de sugestão */
+        function limparSessao() { // feita pra limpar o storage 
 
+            sessionStorage.clear();
+
+            window.location = "../loginUmbanda.html";
         }
+
     </script>
 
 </body>
