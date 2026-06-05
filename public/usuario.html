@@ -35,13 +35,7 @@
                         <label>E-mail</label>
                         <input type="email" oninput="fEmail()" id="ipt_email" placeholder="nome@email.com">
                     </div>
-
-                    <div class="box-cadastro" id="div_box_cadastro">
-                        <div class="texto-cadastro textinho" id="div_cadastro">
-                            <b> cadastro realizado com sucesso!</b>
-                        </div>
-                    </div>
-
+                    
                     <div id="div_email" class="validacao"></div>
 
                     <div class="input-group">
@@ -91,7 +85,6 @@
                     <div id="div_botao" class="validacao"></div>
 
                     <button type="button" class="btn-primary" onclick="fVerificar()">
-                        <!-- <img src="./assets/icons/folha-branca.svg" alt="" width="20"> -->
                         Criar Conta
                     </button>
                 </form>
@@ -104,11 +97,6 @@
             <div class="overlay"></div>
             <div class="banner-content">
                 <div class="logo">
-
-                </div>
-                <h1></h1>
-                <p></p>
-            </div>
         </section>
 
     </div>
@@ -317,7 +305,7 @@
 
                             console.log('Cadastro realizado com sucesso');
 
-                            div_box_cadastro.style.display = "flex"
+                            div_botao.innerHTML = "Cadastro realizado com sucesso! Aguarde redirecionamento."
 
                             setTimeout(() => location.href = "loginUmbanda.html", 1500);
 
