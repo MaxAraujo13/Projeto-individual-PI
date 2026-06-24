@@ -15,11 +15,12 @@ html {
 }
 /* Banner principal com texto e imagem lado a lado */
 .banner {
+    background-image: url(img/conga.jpg);
     display: flex;
     gap: 2rem;
     align-items: center;
     background-color: #ffffffd6;
-    padding: 3rem 2rem;
+    padding: 3congarem;
     border-bottom: 1px solid #dddddd;
     align-items: center;
     justify-content: center;
@@ -41,13 +42,14 @@ html {
     color: #2d6a2d;
     margin-bottom: 1rem;
     margin-left: 70px;
+     text-shadow: 2px 2px 2px rgba(219, 217, 217, 0.8);
    
 }
 
 .banner-texto p {
     font-size: 1.3rem;
     line-height: 1.7;
-    color: #444444;
+    color: #f1eeee;
     margin-bottom: 1rem;
     margin-left: 80px;
 }
@@ -75,7 +77,6 @@ html {
     width: 380px;
     height: 300px;
     border-radius: 10px;
-    background-image: url('img/umbanda.jpg');
     background-size: cover;
     background-position: center;
 }
